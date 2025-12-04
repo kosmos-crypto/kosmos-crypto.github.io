@@ -4,19 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Боконбаево • Иссык-Куль</title>
-<meta name="description" content="Боконбаево — самое душевное место на Иссык-Куле">
 <style>
   :root{--accent:#00ffff;--text:#fff;--bg:#000}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Arial',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+  body{font-family:Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden}
 
-  /* === ФИКСИРОВАННОЕ МЕНЮ === */
+  /* === ШАПКА И МЕНЮ === */
   .topnav{
     position:fixed;top:0;left:0;right:0;
     padding:28px 20px;
     background:rgba(0,0,0,0.75);
     backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
     z-index:1000;
     transition:all .4s ease;
   }
@@ -26,25 +24,32 @@
     box-shadow:0 10px 30px rgba(0,0,0,0.7);
   }
 
-  .nav-links{
-    display:flex;justify-content:center;gap:40px;
+  .nav-container{
+    max-width:1400px;margin:auto;display:flex;
+    justify-content:space-between;align-items:center;
   }
-  .topnav a{
+
+  .nav-links{
+    display:flex;gap:45px;
+  }
+  .nav-links a{
     color:var(--text);text-decoration:none;
     font-weight:800;font-size:1.38rem;letter-spacing:2px;
     position:relative;transition:.4s;
   }
-  .topnav a::after{
+  .nav-links a::after{
     content:"";position:absolute;bottom:-10px;left:50%;
     width:0;height:3px;background:var(--accent);
     transition:.5s;transform:translateX(-50%);
-    box-shadow:0 0 15px var(--accent);
+    box-shadow:0 0 20px var(--accent);
   }
-  .topnav a:hover{color:var(--accent)}
-  .topnav a:hover::after{width:100%}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a:hover::after{width:100%}
 
-  /* === БУРГЕР С НЕОНОВОЙ АНИМАЦИЕЙ === */
-  .burger{display:none;cursor:pointer;width:34px;height:26px;position:relative}
+  /* === БУРГЕР === */
+  .burger{
+    display:none;cursor:pointer;width:34px;height:26px;position:relative;z-index:1001;
+  }
   .burger span{
     position:absolute;left:0;width:100%;height:4px;
     background:var(--accent);border-radius:4px;
@@ -54,11 +59,41 @@
   .burger span:nth-child(2){top:11px}
   .burger span:nth-child(3){bottom:0}
   .burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
-  .burger.active span:nth-child(2){opacity:0;transform:translateX(20px)}
+  .burger.active span:nth-child(2){opacity:0}
   .burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
 
-  /* === ГЛАВНЫЙ КОНТЕНТ === */
-  main{padding-top:130px;min-height:100vh}
+  /* === ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ === */
+  .mobile-menu{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.98);
+    backdrop-filter:blur(20px);
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    gap:50px;
+    transform:translateY(-100%);
+    transition:transform .6s cubic-bezier(0.7,0,0.3,1);
+    z-index:999;
+  }
+  .mobile-menu.active{
+    transform:translateY(0);
+  }
+  .mobile-menu a{
+    color:var(--text);text-decoration:none;
+    font-size:2.5rem;font-weight:900;letter-spacing:4px;
+    opacity:0;transform:translateY(40px);
+    transition:all .6s;
+  }
+  .mobile-menu.active a{
+    opacity:1;transform:translateY(0);
+  }
+  .mobile-menu a:nth-child(1){transition-delay:0.1s}
+  .mobile-menu a:nth-child(2){transition-delay:0.2s}
+  .mobile-menu a:nth-child(3){transition-delay:0.3s}
+  .mobile-menu a:nth-child(4){transition-delay:0.4s}
+  .mobile-menu a:nth-child(5){transition-delay:0.5s}
+
+  /* === КОНТЕНТ === */
+  main{padding-top:130px}
 
   header{
     background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover fixed;
@@ -71,88 +106,67 @@
     background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.85));
   }
   h1{
-    font-size:8rem;font-weight:900;letter-spacing:10px;
-    text-shadow:0 10px 50px #000, 0 0 40px #00ffff40;
-    z-index:2;text-transform:uppercase;
+    font-size:8rem;font-weight:900;letter-spacing:12px;
+    text-shadow:0 10px 50px #000, 0 0 40px #00ffff30;
+    z-index:2;
   }
   header p{
     font-size:2.4rem;font-weight:300;z-index:2;margin-top:25px;
-    text-shadow:0 5px 20px #000;
   }
 
   .cards-section{padding:120px 20px;background:#0a0a0a;text-align:center}
-  .cards-section h2{
-    font-size:3.3rem;margin-bottom:80px;letter-spacing:5px;
-  }
-  .cards{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-    gap:50px;max-width:1400px;margin:auto;
-  }
-  .card{
-    background:#fff;color:#000;border-radius:32px;overflow:hidden;
-    box-shadow:0 30px 80px rgba(0,0,0,0.6);
-    transition:all .6s cubic-bezier(0.2,0.8,0.2,1);
-  }
-  .card:hover{
-    transform:translateY(-30px) scale(1.02);
-    box-shadow:0 60px 120px rgba(0,255,255,0.3);
-  }
-  .card img{
-    width:100%;height:300px;object-fit:cover;transition:.8s;
-  }
+  .cards-section h2{font-size:3.3rem;margin-bottom:80px;letter-spacing:5px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:50px;max-width:1400px;margin:auto}
+  .card{background:#fff;color:#000;border-radius:32px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);transition:all .6s}
+  .card:hover{transform:translateY(-25px) scale(1.02)}
+  .card img{width:100%;height:300px;object-fit:cover;transition:.8s}
   .card:hover img{transform:scale(1.12)}
   .card h3{padding:38px 20px;font-size:2.1rem;font-weight:800}
 
-  footer{
-    background:#000;padding:100px 20px;text-align:center;
-    color:#aaa;font-size:1.25rem;border-top:1px solid #222;
-  }
+  footer{background:#000;padding:100px 20px;text-align:center;color:#aaa;font-size:1.25rem;border-top:1px solid #222}
 
-  /* ========================================= */
-  /* ========== МОБИЛЬНАЯ ВЕРСИЯ — ОГОНЬ ========== */
-  /* ========================================= */
+  /* === МОБИЛЬНАЯ ВЕРСИЯ === */
   @media (max-width: 768px) {
-    .nav-links{position:fixed;top:0;left:0;width:100%;height:100vh;
-      background:rgba(0,0,0,0.98);flex-direction:column;
-      justify-content:center;align-items:center;gap:50px;
-      transform:translateY(-100%);transition:.6s cubic-bezier(0.7,0,0.3,1);
-      backdrop-filter:blur(20px);
-    }
-    .nav-links.active{
-      transform:translateY(0);
-    }
-    .topnav a{font-size:2.2rem !important;letter-spacing:4px}
     .burger{display:block}
-
-    /* Заголовок — идеально на телефоне */
-    h1{font-size:4.8rem !important;letter-spacing:6px}
-    header p{font-size:1.65rem !important}
-
+    .nav-links{display:none}
+    
+    h1{font-size:5rem;letter-spacing:6px}
+    header p{font-size:1.7rem}
     main{padding-top:100px}
   }
-
   @media (max-width: 480px) {
-    h1{font-size:4rem;letter-spacing:4px}
+    h1{font-size:4.2rem}
     header p{font-size:1.5rem}
-    .cards-section h2{font-size:2.6rem}
-    .card h3{font-size:1.9rem;padding:30px 15px}
+    .mobile-menu a{font-size:2.2rem}
   }
 </style>
 </head>
 <body>
 
-<nav class="topnav" id="nav">
-  <div class="burger" onclick="this.classList.toggle('active');document.getElementById('nav').querySelector('.nav-links').classList.toggle('active')">
-    <span></span><span></span><span></span>
-  </div>
-  <div class="nav-links">
-    <a href="index.html">ГЛАВНАЯ</a>
-    <a href="hotels.html">ОТЕЛИ</a>
-    <a href="places.html">МЕСТА</a>
-    <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
-    <a href="contacts.html">КОНТАКТЫ</a>
+<nav class="topnav">
+  <div class="nav-container">
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="hotels.html">ОТЕЛИ</a>
+      <a href="places.html">МЕСТА</a>
+      <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
+      <a href="contacts.html">КОНТАКТЫ</a>
+    </div>
   </div>
 </nav>
+
+<!-- Полноэкранное мобильное меню -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">ГЛАВНАЯ</a>
+  <a href="hotels.html">ОТЕЛИ</a>
+  <a href="places.html">МЕСТА</a>
+  <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
+  <a href="contacts.html">КОНТАКТЫ</a>
+</div>
 
 <main>
   <header>
@@ -180,11 +194,20 @@
 
   <footer>
     <p>Боконбаево 2025 • Туризм от местных жителей</p>
-    <p>WhatsApp: <a href="https://wa.me/996999123456" style="color:#00ffff;text-decoration:none">+996 ___ ___ ___</a></p>
+    <p>WhatsApp: <a href="https://wa.me/996999123456" style="color:#00ffff">+996 ___ ___ ___</a></p>
   </footer>
 </main>
 
 <script>
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  });
+
   // Сжатие шапки при скролле
   window.addEventListener('scroll', () => {
     document.querySelector('.topnav').classList.toggle('scrolled', window.scrollY > 80);
