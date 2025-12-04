@@ -4,80 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Боконбаево • Иссык-Куль</title>
-<meta name="description" content="Боконбаево — самое душевное село южного берега Иссык-Куля. Юрты, беркутчи, чистое озеро и настоящие люди.">
+<meta name="description" content="Боконбаево — самое душевное село южного берега Иссык-Куля. Юрты, охота с беркутом, чистое озеро.">
 <style>
-  :root{
-    --accent: #00ffff;
-    --text: #ffffff;
-    --bg: #000000;
-  }
+  :root{--accent:#00ffff;--text:#fff;--bg:#000}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Arial',sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6}
+  body{font-family:Arial,sans-serif;background:#000;color:#fff;line-height:1.6;overflow-x:hidden}
 
-  /* ========= УЛЬТРА-КРУТОЕ МЕНЮ ========= */
+  /* === ФИКСИРОВАННОЕ КРУТОЕ МЕНЮ === */
   .topnav{
-    position:fixed;
-    top:0;left:0;right:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    position:fixed;top:0;left:0;right:0;
+    display:flex;justify-content:center;align-items:center;
     padding:28px 20px;
-    background:rgba(0,0,0,0.65);
+    background:rgba(0,0,0,0.7);
     backdrop-filter:blur(12px);
     -webkit-backdrop-filter:blur(12px);
     transition:all .4s cubic-bezier(0.4,0,0.2,1);
     z-index:1000;
-    border-bottom:1px solid rgba(0,255,255,0);
   }
   .topnav.scrolled{
     padding:14px 20px;
     background:rgba(0,0,0,0.98);
-    border-bottom:1px solid rgba(0,255,255,0.25);
     box-shadow:0 10px 30px rgba(0,0,0,0.6);
   }
   .topnav a{
-    color:var(--text);
-    text-decoration:none;
-    font-weight:800;
-    font-size:1.35rem;
-    letter-spacing:2px;
-    margin:0 28px;
-    position:relative;
-    transition:all .4s;
+    color:var(--text);text-decoration:none;
+    font-weight:800;font-size:1.35rem;letter-spacing:2px;
+    margin:0 30px;position:relative;transition:all .4s;
   }
   .topnav a::after{
-    content:"";
-    position:absolute;
-    bottom:-12px; left:50%;
-    width:0; height:3px;
-    background:var(--accent);
-    border-radius:2px;
-    transition:all .4s;
-    transform:translateX(-50%);
+    content:"";position:absolute;bottom:-12px;left:50%;
+    width:0;height:3px;background:var(--accent);
+    transition:all .4s;transform:translateX(-50%);
     box-shadow:0 0 15px var(--accent);
   }
-  .topnav a:hover{
-    color:var(--accent);
-  }
-  .topnav a:hover::after{
-    width:100%;
-  }
+  .topnav a:hover{color:var(--accent)}
+  .topnav a:hover::after{width:100%}
 
-  /* Бургер для мобилок */
-  .burger{
-    display:none;
-    cursor:pointer;
-    width:30px;height:22px;
-    position:relative;
-  }
-  .burger span{
-    position:absolute;
-    width:100%;height:3px;
-    background:var(--accent);
-    border-radius:3px;
-    transition:all .3s;
-    box-shadow:0 0 10px #00ffff80;
-  }
+  /* Бургер-меню для телефонов */
+  .burger{display:none;cursor:pointer;width:30px;height:22px;position:relative}
+  .burger span{position:absolute;width:100%;height:3px;background:var(--accent);border-radius:3px;transition:.3s}
   .burger span:nth-child(1){top:0}
   .burger span:nth-child(2){top:9px}
   .burger span:nth-child(3){top:18px}
@@ -85,52 +50,13 @@
   .burger.active span:nth-child(2){opacity:0}
   .burger.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
 
-  /* Мобильное меню */
-  @media(max-width:900px){
-    .topnav a{margin:0 15px;font-size:1.2rem}
-  }
-  @media(max-width:720px){
-    .topnav{
-      justify-content:space-between;
-      padding:20px 25px;
-    }
-    .topnav a{
-      position:absolute;
-      top:100%;left:0;
-      width:100%;
-      text-align:center;
-      padding:20px 0;
-      background:#000;
-      transform:translateY(-150%);
-      opacity:0;
-      transition:all .5s;
-      border-bottom:1px solid #111;
-    }
-    .topnav a:nth-child(1){transition-delay:0.05s}
-    .topnav a:nth-child(2){transition-delay:0.10s}
-    .topnav a:nth-child(3){transition-delay:0.15s}
-    .topnav a:nth-child(4){transition-delay:0.20s}
-    .topnav a:nth-child(5){transition-delay:0.25s}
+  /* Главный контент — отступ от меню */
+  main{padding-top:140px}
 
-    .topnav.active a{
-      transform:translateY(0);
-      opacity:1;
-    }
-    .burger{display:block}
-  }
-
-  /* Остальной контент сдвигаем под меню */
-  header, .cards-section{padding-top:110px}
-
-  /* Остальной твой стиль карточек и т.д. оставляем как был (я его чуть подправил) */
   header{
     background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover fixed;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+    height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;
     position:relative;
   }
   header::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.9))}
@@ -140,18 +66,40 @@
   .cards-section{padding:120px 20px;background:#0a0a0a;text-align:center}
   .cards-section h2{font-size:3.2rem;margin-bottom:80px;letter-spacing:4px}
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:60px;max-width:1400px;margin:auto}
-  .card{background:#fff;color:#000;border-radius:32px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);transition:.6s}
+  .card{background:#fff;color:#000;border-radius:32px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);transition:.6s;cursor:pointer}
   .card:hover{transform:translateY(-30px);box-shadow:0 50px 100px rgba(0,255,255,0.25)}
   .card img{width:100%;height:300px;object-fit:cover;transition:.7s}
   .card:hover img{transform:scale(1.1)}
   .card h3{padding:35px 20px;font-size:2.1rem;font-weight:800}
 
   footer{background:#000;padding:90px 20px;text-align:center;color:#aaa;font-size:1.2rem;border-top:1px solid #222}
+
+  /* ====== АДАПТИВ ====== */
+  @media(max-width:900px){
+    .topnav a{margin:0 15px;font-size:1.2rem}
+  }
+  @media(max-width:720px){
+    .topnav{justify-content:space-between;padding:20px 25px}
+    .topnav a{
+      position:absolute;top:100%;left:0;width:100%;text-align:center;
+      padding:20px 0;background:#000;transform:translateY(-200%);opacity:0;
+      transition:all .5s;border-bottom:1px solid #111;
+    }
+    .topnav a:nth-child(n+2){transition-delay:calc((var(--i,0)) * 0.05s)}
+    .topnav.active a{transform:translateY(0);opacity:1}
+    .burger{display:block}
+    main{padding-top:120px}
+  }
+  @media(max-width:480px){
+    h1{font-size:4.5rem;letter-spacing:6px}
+    header p{font-size:1.6rem}
+  }
 </style>
 </head>
 <body>
 
-<!-- УЛЬТРА-МЕНЮ -->
+<!-- МЕНЮ -->
 <nav class="topnav" id="myTopnav">
   <div class="burger" onclick="this.classList.toggle('active');document.getElementById('myTopnav').classList.toggle('active')">
     <span></span><span></span><span></span>
@@ -163,38 +111,40 @@
   <a href="contacts.html">КОНТАКТЫ</a>
 </nav>
 
-<header>
-  <h1>БОКОНБАЕВО</h1>
-  <p>Самое душевное село южного берега Иссык-Куля</p>
-</header>
+<main>
+  <header>
+    <h1>БОКОНБАЕВО</h1>
+    <p>Самое душевное село южного берега Иссык-Куля</p>
+  </header>
 
-<div class="cards-section">
-  <h2>Что вас ждёт в Боконбаево</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Беркут">
-      <h3>Охота с беркутом</h3>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Юрта">
-      <h3>Настоящие юрты</h3>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль">
-      <h3>Иссык-Куль в 15 минутах</h3>
+  <div class="cards-section">
+    <h2>Что вас ждёт в Боконбаево</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Охота с беркутом">
+        <h3>Охота с беркутом</h3>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Юрта">
+        <h3>Настоящие юрты</h3>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль">
+        <h3>Иссык-Куль в 15 минутах</h3>
+      </div>
     </div>
   </div>
-</div>
 
-<footer>
-  <p>Боконбаево 2025 • Туризм от местных жителей</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456" style="color:#00ffff;text-decoration:none">+996 999 123 456</a></p>
-</footer>
+  <footer>
+    <p>Боконбаево 2025 • Туризм от местных жителей</p>
+    <p>WhatsApp: <a href="https://wa.me/996999123456" style="color:#00ffff;text-decoration:none">+996 999 123 456</a></p>
+  </footer>
+</main>
 
 <script>
-  // Плавное сжатие меню при скролле
+  // Сжатие меню при скролле
   window.addEventListener('scroll', () => {
-    document.querySelector('.topnav').classList.toggle('scrolled', window.scrollY > 100);
+    document.querySelector('.topnav').classList.toggle('scrolled', window.scrollY > 80);
   });
 </script>
 </body>
