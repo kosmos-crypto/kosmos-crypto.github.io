@@ -3,44 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Боконбаево • Южный берег Иссык-Куля</title>
+    <title>Боконбаево • Иссык-Куль</title>
     <style>
-        body{margin:0;font-family:Arial,sans-serif;color:#333;background:#f0f4f8}
-        nav{background:rgba(0,0,0,0.85);padding:15px 0;position:fixed;width:100%;top:0;z-index:100}
-        nav a{color:white;margin:0 25px;text-decoration:none;font-size:1.3rem;font-weight:500}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:Arial,sans-serif;background:#f0f4f8;color:#333}
+        
+        /* Фон на весь экран */
         header{
             background: url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat fixed;
-            height:90vh;
+            height:100vh;
             display:flex;
             flex-direction:column;
             justify-content:center;
             align-items:center;
-            color:white;
             text-align:center;
-            text-shadow:3px 3px 20px rgba(0,0,0,0.9);
+            color:white;
+            text-shadow:3px 3px 20px rgba(0,0,0,0,0.9);
+            position:relative;
         }
-        h1{font-size:5.5rem;margin:0;letter-spacing:2px}
-        header p{font-size:2.2rem;margin:15px 0 0}
-        .container{max-width:1100px;margin:0 auto;padding:120px 20px 60px;text-align:center}
-        .cards{display:flex;flex-wrap:wrap;gap:35px;justify-content:center;margin-top:30px}
-        .card{background:white;width:340px;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.15);transition:0.3s}
-        .card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.2)}
-        .card img{width:100%;height:230px;object-fit:cover}
-        .card h3{padding:25px 15px;margin:0;font-size:1.5rem}
-        footer{background:#111;color:#aaa;text-align:center;padding:50px 20px}
+        h1{font-size:3.5rem;margin:0;line-height:1.1}
+        header p{font-size:1.6rem;margin-top:15px}
+
+        /* Навбар с гамбургером на мобильных */
+        nav{
+            position:fixed;top:0;width:100%;background:rgba(0,0,0,0.9);
+            padding:15px 20px;z-index:1000;display:flex;justify-content:space-between;align-items:center;
+        }
+        .logo{color:white;font-weight:bold;font-size:1.4rem}
+        .menu{display:flex;gap:30px}
+        .menu a{color:white;text-decoration:none;font-size:1.1rem}
+        .hamburger{display:none;font-size:1.8rem;color:white;cursor:pointer}
+
+        /* Мобильное меню */
+        @media (max-width:860px){
+            .menu{display:none;flex-direction:column;position:absolute;top:70px;left:0;width:100%;background:rgba(0,0,0,0.95);padding:20px 0}
+            .menu.active{display:flex}
+            .hamburger{display:block}
+            h1{font-size:2.8rem}
+            header p{font-size:1.4rem}
+        }
+
+        .container{max-width:1100px;margin:0 auto;padding:100px 20px 60px;text-align:center}
+        h2{font-size:2.2rem;margin-bottom:30px}
+
+        .cards{
+            display:flex;flex-wrap:wrap;gap:25px;justify-content:center;
+        }
+        .card{
+            background:white;border-radius:18px;overflow:hidden;
+            width:100%;max-width:360px;box-shadow:0 8px 25px rgba(0,0,0,0.12);
+            transition:0.3s;
+        }
+        .card:hover{transform:translateY(-10px)}
+        .card img{width:100%;height:220px;object-fit:cover}
+        .card h3{padding:20px;font-size:1.4rem}
+
+        footer{
+            background:#111;color:#aaa;padding:50px 20px;text-align:center
+        }
+
+        /* Очень маленькие экраны */
+        @media (max-width:480px){
+            h1{font-size:2.4rem}
+            header p{font-size:1.3rem}
+            .card{max-width:100%}
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center">
+    <div class="logo">Боконбаево</div>
+    <div class="hamburger" onclick="this.parentElement.querySelector('.menu').classList.toggle('active')">☰</div>
+    <div class="menu">
         <a href="index.html">Главная</a>
-        <div>
-            <a href="hotels.html">Отели</a>
-            <a href="places.html">Красивые места</a>
-            <a href="activities.html">Чем заняться</a>
-            <a href="contacts.html">Контакты</a>
-        </div>
+        <a href="hotels.html">Отели</a>
+        <a href="places.html">Места</a>
+        <a href="activities.html">Развлечения</a>
+        <a href="contacts.html">Контакты</a>
     </div>
 </nav>
 
@@ -50,7 +90,7 @@
 </header>
 
 <div class="container">
-    <h2>Почему к нам приезжают туристы?</h2>
+    <h2>Почему приезжают к нам?</h2>
     <div class="cards">
         <div class="card">
             <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt="Беркут">
@@ -58,18 +98,18 @@
         </div>
         <div class="card">
             <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt="Юрта">
-            <h3>Проживание в юртах</h3>
+            <h3>Жизнь в юртах</h3>
         </div>
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="Иссык-Куль">
-            <h3>Чистейшее озеро в 15 минутах</h3>
+            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="Озеро">
+            <h3>Иссык-Куль в 15 минутах</h3>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>Боконбаево 2025 • Туристический гид от местных жителей</p>
-    <p>WhatsApp: +996 … (вставишь свой номер)</p>
+    <p>Боконбаево 2025 • Туристический гид от местных</p>
+    <p>WhatsApp: +996 ___ ___ ___ (вставишь свой номер)</p>
 </footer>
 
 </body>
