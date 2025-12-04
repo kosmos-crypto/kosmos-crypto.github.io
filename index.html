@@ -6,90 +6,89 @@
     <title>Боконбаево • Иссык-Куль</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Google Sans','Segoe UI',Arial,sans-serif;background:#f8f9fa;color:#222;overflow-x:hidden}
+        body{font-family:'Segoe UI',Arial,sans-serif;background:#f8f9fa;color:#222;overflow-x:hidden}
 
-        /* === СУПЕР БОЛЬШОЕ ФИКСИРОВАННОЕ МЕНЮ === */
+        /* Нижнее огромное меню — всегда видно */
         nav{
-            position:fixed;bottom:0;left:0;width:100%;background:rgba(15,15,25,0.98);
-            backdrop-filter:blur(20px);padding:12px 0;z-index:9999;
-            border-top:1px solid rgba(255,255,255,0.1);
+            position:fixed;bottom:0;left:0;width:100%;background:rgba(10,10,20,0.98);
+            backdrop-filter:blur(20px);padding:14px 0;z-index:9999;
+            border-top:1px solid rgba(255,255,255,0.08);
         }
         .nav-container{
-            max-width:500px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;
+            max-width:540px;margin:0 auto;display:flex;justify-content:space-around;
         }
         .nav-item{
-            color:white;text-align:center;flex:1;transition:0.3s;transform:translateY(0);
+            color:white;text-align:center;flex:1;transition:0.3s;
         }
-        .nav-item:active{transform:translateY(4px)}
-        .nav-icon{font-size:2.2rem;margin-bottom:6px;display:block}
-        .nav-text{font-size:0.95rem;font-weight:600;letter-spacing:0.5px}
+        .nav-item:active{transform:scale(0.92)}
+        .nav-icon{font-size:2.4rem;margin-bottom:5px;display:block}
+        .nav-text{font-size:1rem;font-weight:600;letter-spacing:0.6px}
 
-        /* Активная ссылка — подсветка */
-        .nav-item.active{color:#00e7ff}
-        .nav-item.active .nav-icon{filter:drop-shadow(0 0 10px #00e7ff)}
+        /* Подсветка активной страницы */
+        .nav-item.active{color:#00ffff}
+        .nav-item.active .nav-icon{filter:drop-shadow(0 0 12px #00ffff)}
 
-        /* === Шапка === */
+        /* Шапка */
         header{
             background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat fixed;
             height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
             text-align:center;color:white;position:relative;
         }
-        header::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-            background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.75))}
-        .header-content{z-index:2}
-        h1{font-size:5.5rem;font-weight:900;letter-spacing:4px;text-shadow:0 6px 30px rgba(0,0,0,0.8)}
-        header p{font-size:2rem;margin-top:20px;letter-spacing:2px}
-
-        .container{max-width:1200px;margin:0 auto;padding:100px 20px 140px;text-align:center}
-        h2{font-size:2.8rem;margin-bottom:60px;font-weight:700}
-        .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px}
-        .card{
-            background:white;border-radius:28px;overflow:hidden;
-            box-shadow:0 20px 50px rgba(0,0,0,0.12);transition:0.4s;
+        header::before{
+            content:'';position:absolute;inset:0;
+            background:linear-gradient(to bottom,rgba(0,0,0,0.25),rgba(0,0,0,0.8));
         }
-        .card:hover{transform:translateY(-15px);box-shadow:0 30px 70px rgba(0,0,0,0.18)}
-        .card img{width:100%;height:260px;object-fit:cover}
-        .card h3{padding:28px 15px;font-size:1.7rem;font-weight:600}
+        .header-content{z-index:2}
+        h1{font-size:5.8rem;font-weight:900;letter-spacing:5px;text-shadow:0 8px 40px rgba(0,0,0,0.8)}
+        header p{font-size:2.1rem;margin-top:20px;letter-spacing:1.8px}
 
-        footer{background:#0a0a0a;color:#999;padding:80px 20px 20px;text-align:center;font-size:1.1rem}
+        .container{max-width:1200px;margin:0 auto;padding:100px 20px 160px;text-align:center}
+        h2{font-size:2.9rem;margin-bottom:70px;font-weight:800}
+        .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:45px}
+        .card{
+            background:white;border-radius:30px;overflow:hidden;
+            box-shadow:0 25px 60px rgba(0,0,0,0.14);transition:0.4s;
+        }
+        .card:hover{transform:translateY(-20px)}
+        .card img{width:100%;height:270px;object-fit:cover}
+        .card h3{padding:30px 15px;font-size:1.8rem;font-weight:700}
 
-        /* Мобильные улучшения */
+        footer{background:#0a0a0a;color:#888;padding:90px 20px 30px;text-align:center;font-size:1.1rem}
+
         @media (max-width:768px){
-            h1{font-size:4.2rem}
-            header p{font-size:1.6rem}
-            .nav-icon{font-size:2rem}
-            .nav-text{font-size:0.9rem}
+            h1{font-size:4.5rem}
+            header p{font-size:1.7rem}
+            .nav-icon{font-size:2.2rem}
         }
         @media (max-width:480px){
-            h1{font-size:3.4rem}
+            h1{font-size:3.6rem}
             header p{font-size:1.4rem}
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- БОЛЬШОЕ НИЖНЕЕ МЕНЮ — ВИДНО НА ВСЁМ ЭКРАНЕ -->
+<!-- ЭТО САМОЕ ВАЖНОЕ — НИЖНЕЕ МЕНЮ -->
 <nav>
     <div class="nav-container">
         <a href="index.html" class="nav-item active">
-            <span class="nav-icon">🏠</span>
+            <span class="nav-icon">Home</span>
             <span class="nav-text">Главная</span>
         </a>
         <a href="hotels.html" class="nav-item">
-            <span class="nav-icon">🏨</span>
+            <span class="nav-icon">Hotel</span>
             <span class="nav-text">Отели</span>
         </a>
         <a href="places.html" class="nav-item">
-            <span class="nav-icon">🗻</span>
+            <span class="nav-icon">Mountain</span>
             <span class="nav-text">Места</span>
         </a>
         <a href="activities.html" class="nav-item">
-            <span class="nav-icon">🎯</span>
+            <span class="nav-icon">Target</span>
             <span class="nav-text">Развлечения</span>
         </a>
         <a href="contacts.html" class="nav-item">
-            <span class="nav-icon">☎️</span>
+            <span class="nav-icon">Phone</span>
             <span class="nav-text">Контакты</span>
         </a>
     </div>
@@ -103,26 +102,26 @@
 </header>
 
 <div class="container">
-    <h2>Почему к нам приезжают?</h2>
+    <h2>Почему к нам приезжают тысячи туристов?</h2>
     <div class="cards">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt="Беркут">
+            <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt="">
             <h3>Охота с беркутом</h3>
         </div>
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt="Юрта">
-            <h3>Проживание в юртах</h3>
+            <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt="">
+            <h3>Настоящие юрты</h3>
         </div>
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="Озеро">
-            <h3>Иссык-Куль в 15 минутах</h3>
+            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="">
+            <h3>Иссык-Куль рядом</h3>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>Боконбаево 2025 • Туристический гид от местных жителей</p>
-    <p>WhatsApp: +996 ___ ___ ___ (вставишь свой номер)</p>
+    <p>Боконбаево 2025 • Туризм от души</p>
+    <p>WhatsApp: +996 ___ ___ ___</p>
 </footer>
 
 </body>
