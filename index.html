@@ -5,68 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Боконбаево • Иссык-Куль</title>
     <style>
-        *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:Arial,sans-serif;background:#f0f4f8;color:#333}
-        
-        /* Фон на весь экран */
-        header{
-            background: url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat fixed;
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            color:white;
-            text-shadow:3px 3px 20px rgba(0,0,0,0,0.9);
-            position:relative;
-        }
-        h1{font-size:3.5rem;margin:0;line-height:1.1}
-        header p{font-size:1.6rem;margin-top:15px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Arial,sans-serif;background:#f8f9fa;color:#333;overflow-x:hidden}
 
-        /* Навбар с гамбургером на мобильных */
+        /* === Навбар с плавным открытием === */
         nav{
-            position:fixed;top:0;width:100%;background:rgba(0,0,0,0.9);
-            padding:15px 20px;z-index:1000;display:flex;justify-content:space-between;align-items:center;
+            position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.95);
+            backdrop-filter:blur(10px);padding:18px 20px;z-index:1000;
+            display:flex;justify-content:space-between;align-items:center;
+            transition:0.4s;
         }
-        .logo{color:white;font-weight:bold;font-size:1.4rem}
-        .menu{display:flex;gap:30px}
-        .menu a{color:white;text-decoration:none;font-size:1.1rem}
-        .hamburger{display:none;font-size:1.8rem;color:white;cursor:pointer}
-
-        /* Мобильное меню */
-        @media (max-width:860px){
-            .menu{display:none;flex-direction:column;position:absolute;top:70px;left:0;width:100%;background:rgba(0,0,0,0.95);padding:20px 0}
-            .menu.active{display:flex}
-            .hamburger{display:block}
-            h1{font-size:2.8rem}
-            header p{font-size:1.4rem}
+        .logo{color:white;font-weight:700;font-size:1.5rem;letter-spacing:1px}
+        .hamburger{cursor:pointer;font-size:2rem;color:white;transition:0.3s}
+        .hamburger.active{transform:rotate(90deg)}
+        .nav-links{
+            position:fixed;top:0;left:0;width:100%;height:100vh;
+            background:rgba(0,0,0,0.98);display:flex;flex-direction:column;
+            justify-content:center;align-items:center;gap:40px;
+            font-size:1.8rem;transform:translateX(100%);
+            transition:transform 0.45s cubic-bezier(0.77,0,0.18,1);
         }
+        .nav-links.active{transform:translateX(0)}
+        .nav-links a{color:white;text-decoration:none;position:relative;transition:0.3s}
+        .nav-links a::after{
+            content:'';position:absolute;bottom:-8px;left:50%;width:0;height:3px;
+            background:#00d4ff;transition:0.4s;transform:translateX(-50%)
+        }
+        .nav-links a:hover::after{width:60%}
 
-        .container{max-width:1100px;margin:0 auto;padding:100px 20px 60px;text-align:center}
-        h2{font-size:2.2rem;margin-bottom:30px}
+        /* === Шапка с лёгким параллаксом и плавным текстом === */
+        header{
+            background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat fixed;
+            height:100vh;display:flex;flex-direction:column;
+            justify-content:center;align-items:center;text-align:center;color:white;
+            position:relative;overflow:hidden;
+        }
+        header::before{
+            content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+            background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.7));
+        }
+        .header-content{z-index:2;opacity:0;transform:translateY(40px);animation:fadeUp 1.2s 0.5s forwards}
+        h1{font-size:4.8rem;font-weight:900;letter-spacing:3px;text-shadow:0 4px 20px rgba(0,0,0,0.7)}
+        header p{font-size:1.9rem;margin-top:15px;letter-spacing:1.5px}
 
+        /* === Плавное появление карточек === */
+        .container{max-width:1200px;margin:0 auto;padding:100px 20px 80px;text-align:center}
+        h2{font-size:2.4rem;margin-bottom:60px;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.8s forwards}
         .cards{
-            display:flex;flex-wrap:wrap;gap:25px;justify-content:center;
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:35px;
         }
         .card{
-            background:white;border-radius:18px;overflow:hidden;
-            width:100%;max-width:360px;box-shadow:0 8px 25px rgba(0,0,0,0.12);
-            transition:0.3s;
+            background:white;border-radius:24px;overflow:hidden;
+            box-shadow:0 15px 35px rgba(0,0,0,0.1);
+            opacity:0;transform:translateY(60px);
+            transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);
         }
-        .card:hover{transform:translateY(-10px)}
-        .card img{width:100%;height:220px;object-fit:cover}
-        .card h3{padding:20px;font-size:1.4rem}
+        .card.visible{opacity:1;transform:translateY(0)}
+        .card img{width:100%;height:240px;object-fit:cover;transition:0.5s}
+        .card:hover img{transform:scale(1.08)}
+        .card h3{padding:25px 15px;font-size:1.55rem;font-weight:600}
 
-        footer{
-            background:#111;color:#aaa;padding:50px 20px;text-align:center
+        footer{background:#0f0f0f;color:#aaa;padding:60px 20px;text-align:center;font-size:1.1rem}
+
+        /* Анимации */
+        @keyframes fadeUp{
+            to{opacity:1;transform:translateY(0)}
         }
 
-        /* Очень маленькие экраны */
+        /* Мобильные улучшения */
+        @media (max-width:768px){
+            h1{font-size:3.4rem}
+            header p{font-size:1.5rem}
+            .nav-links{font-size:1.6rem;gap:35px}
+        }
         @media (max-width:480px){
-            h1{font-size:2.4rem}
+            h1{font-size:2.8rem}
             header p{font-size:1.3rem}
-            .card{max-width:100%}
+            .container{padding-top:70px}
         }
     </style>
 </head>
@@ -74,43 +89,51 @@
 
 <nav>
     <div class="logo">Боконбаево</div>
-    <div class="hamburger" onclick="this.parentElement.querySelector('.menu').classList.toggle('active')">☰</div>
-    <div class="menu">
-        <a href="index.html">Главная</a>
-        <a href="hotels.html">Отели</a>
-        <a href="places.html">Места</a>
-        <a href="activities.html">Развлечения</a>
-        <a href="contacts.html">Контакты</a>
-    </div>
+    <div class="hamburger" onclick="this.classList.toggle('active');document.querySelector('.nav-links').classList.toggle('active')">☰</div>
 </nav>
 
+<div class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="hotels.html">Отели</a>
+    <a href="places.html">Места</a>
+    <a href="activities.html">Развлечения</a>
+    <a href="contacts.html">Контакты</a>
+</div>
+
 <header>
-    <h1>Боконбаево</h1>
-    <p>Самое душевное село южного берега Иссык-Куля</p>
+    <div class="header-content">
+        <h1>Боконбаево</h1>
+        <p>Самое душевное село южного берега Иссык-Куля</p>
+    </div>
 </header>
 
 <div class="container">
-    <h2>Почему приезжают к нам?</h2>
+    <h2>Почему выбирают нас?</h2>
     <div class="cards">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt="Беркут">
-            <h3>Охота с беркутом</h3>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt="Юрта">
-            <h3>Жизнь в юртах</h3>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="Озеро">
-            <h3>Иссык-Куль в 15 минутах</h3>
-        </div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt=""><h3>Охота с беркутом</h3></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt=""><h3>Жизнь в юртах</h3></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt=""><h3>Иссык-Куль в 15 минутах</h3></div>
     </div>
 </div>
 
 <footer>
     <p>Боконбаево 2025 • Туристический гид от местных</p>
-    <p>WhatsApp: +996 ___ ___ ___ (вставишь свой номер)</p>
+    <p>WhatsApp: +996 ___ ___ ___</p>
 </footer>
+
+<script>
+    // Плавное появление карточек при прокрутке
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+</script>
 
 </body>
 </html>
