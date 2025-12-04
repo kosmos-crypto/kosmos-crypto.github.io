@@ -1,166 +1,179 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>Боконбаево • Иссык-Куль</title>
+<meta name="description" content="Боконбаево — душевное село южного берега Иссык-Куля. Отели, развлечения, охота с беркутом и настоящие юрты" />
+
 <style>
-  :root{--accent:#00ffff;--text:#fff;--bg:#000}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden}
+  /* ===== Переменные и базовые стили ===== */
+  :root{
+    --accent: #00e5e5;
+    --accent-weak: rgba(0,229,229,0.12);
+    --bg: #0b0c0d;          /* мягкий тёмный фон */
+    --card-bg: #0f1112;
+    --text: #e9eef0;
+    --muted: #a7b0b3;
+    --max-width: 1400px;
+  }
 
-  /* === ШАПКА И МЕНЮ === */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;padding:0;font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;overflow-x:hidden;
+    line-height:1.45;
+  }
+
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+
+  /* ===== Шапка (nav) ===== */
   .topnav{
-    position:fixed;top:0;left:0;right:0;
-    padding:28px 20px;
-    background:rgba(0,0,0,0.75);
-    backdrop-filter:blur(15px);
-    z-index:1000;
-    transition:all .4s ease;
+    position:fixed;inset:0 0 auto 0;display:flex;align-items:center;
+    width:100%;padding:20px 18px;background:linear-gradient(180deg, rgba(11,12,13,0.35), rgba(11,12,13,0.65));
+    backdrop-filter: blur(8px);z-index:1100;transition:transform .33s ease, padding .28s ease, background .3s ease, box-shadow .28s ease;
   }
-  .topnav.scrolled{
-    padding:16px 20px;
-    background:rgba(0,0,0,0.98);
-    box-shadow:0 10px 30px rgba(0,0,0,0.7);
-  }
+  .topnav.scrolled{ padding:12px 18px; background:linear-gradient(180deg, rgba(6,7,8,0.65), rgba(6,7,8,0.9)); box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+  .topnav.hidden{ transform: translateY(-120%); }
 
-  .nav-container{
-    max-width:1400px;margin:auto;display:flex;
-    justify-content:space-between;align-items:center;
-  }
+  .nav-container{ width:100%; max-width:var(--max-width); margin:0 auto; display:flex;align-items:center;justify-content:space-between;gap:16px; }
 
-  .nav-links{
-    display:flex;gap:45px;
-  }
-  .nav-links a{
-    color:var(--text);text-decoration:none;
-    font-weight:800;font-size:1.38rem;letter-spacing:2px;
-    position:relative;transition:.4s;
-  }
-  .nav-links a::after{
-    content:"";position:absolute;bottom:-10px;left:50%;
-    width:0;height:3px;background:var(--accent);
-    transition:.5s;transform:translateX(-50%);
-    box-shadow:0 0 20px var(--accent);
-  }
-  .nav-links a:hover{color:var(--accent)}
-  .nav-links a:hover::after{width:100%}
+  .brand{ display:flex;align-items:center;gap:12px; font-weight:800; letter-spacing:1px; font-size:1.05rem; color:var(--text) }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 18px var(--accent-weak); }
 
-  /* === БУРГЕР === */
+  .nav-links{ display:flex; gap:28px; align-items:center; }
+  .nav-links a{ color:var(--text); font-weight:700; font-size:0.98rem; letter-spacing:1px; position:relative; padding:6px 0; }
+  .nav-links a::after{ content:""; position:absolute; left:50%; bottom:-8px; transform:translateX(-50%); width:0; height:3px; background:var(--accent); border-radius:4px; transition:width .35s ease; box-shadow:0 0 20px var(--accent-weak);}
+  .nav-links a:hover::after{ width:70%; }
+  .nav-links a:focus{ outline:2px solid rgba(0,229,229,0.12); outline-offset:4px; }
+
+  /* ===== Бургер (мобильный) ===== */
   .burger{
-    display:none;cursor:pointer;width:34px;height:26px;position:relative;z-index:1001;
+    display:none; width:40px;height:34px; position:relative; cursor:pointer; background:none;border:0;padding:0;
   }
-  .burger span{
-    position:absolute;left:0;width:100%;height:4px;
-    background:var(--accent);border-radius:4px;
-    transition:.4s;box-shadow:0 0 15px #00ffff80;
-  }
-  .burger span:nth-child(1){top:0}
-  .burger span:nth-child(2){top:11px}
-  .burger span:nth-child(3){bottom:0}
-  .burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
-  .burger.active span:nth-child(2){opacity:0}
-  .burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
+  .burger span{ position:absolute; left:0; width:100%; height:3px; background:var(--accent); border-radius:3px; transition:transform .35s ease, opacity .25s ease; box-shadow:0 0 12px var(--accent-weak); }
+  .burger span:nth-child(1){ top:6px; }
+  .burger span:nth-child(2){ top:15px; }
+  .burger span:nth-child(3){ top:24px; }
+  .burger[aria-expanded="true"] span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .burger[aria-expanded="true"] span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
 
-  /* === ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ === */
+  /* ===== Мобильное полноэкранное меню ===== */
   .mobile-menu{
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.98);
-    backdrop-filter:blur(20px);
-    display:flex;flex-direction:column;
-    justify-content:center;align-items:center;
-    gap:50px;
-    transform:translateY(-100%);
-    transition:transform .6s cubic-bezier(0.7,0,0.3,1);
-    z-index:999;
+    position:fixed; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:28px;
+    background:linear-gradient(180deg, rgba(3,4,4,0.98), rgba(6,6,6,0.98));
+    transform: translateY(-100%); transition:transform .5s cubic-bezier(.2,.9,.2,1); z-index:1090;
+    padding:40px;
   }
-  .mobile-menu.active{
-    transform:translateY(0);
-  }
-  .mobile-menu a{
-    color:var(--text);text-decoration:none;
-    font-size:2.5rem;font-weight:900;letter-spacing:4px;
-    opacity:0;transform:translateY(40px);
-    transition:all .6s;
-  }
-  .mobile-menu.active a{
-    opacity:1;transform:translateY(0);
-  }
-  .mobile-menu a:nth-child(1){transition-delay:0.1s}
-  .mobile-menu a:nth-child(2){transition-delay:0.2s}
-  .mobile-menu a:nth-child(3){transition-delay:0.3s}
-  .mobile-menu a:nth-child(4){transition-delay:0.4s}
-  .mobile-menu a:nth-child(5){transition-delay:0.5s}
+  .mobile-menu.active{ transform: translateY(0); }
+  .mobile-menu a{ font-size:2rem; font-weight:800; color:var(--text); letter-spacing:2px; text-align:center; }
+  .mobile-menu a:hover{ color:var(--accent); }
 
-  /* === КОНТЕНТ === */
-  main{padding-top:130px}
-
+  /* ===== Главная / header ===== */
   header{
-    background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover fixed;
-    height:100vh;display:flex;flex-direction:column;
-    justify-content:center;align-items:center;text-align:center;
-    position:relative;
+    min-height:80vh; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+    position:relative; padding:18px;
+    background-image: url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg');
+    background-position:center; background-size:cover; background-repeat:no-repeat;
+    background-attachment: fixed; /* выключим на мобильных через медиа-запрос */
   }
   header::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.85));
+    content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(3,4,4,0.15), rgba(3,4,4,0.7));
   }
-  h1{
-    font-size:8rem;font-weight:900;letter-spacing:12px;
-    text-shadow:0 10px 50px #000, 0 0 40px #00ffff30;
-    z-index:2;
+  header .hero{
+    position:relative; z-index:2; max-width:1100px; width:100%;
   }
-  header p{
-    font-size:2.4rem;font-weight:300;z-index:2;margin-top:25px;
+  h1.site-title{
+    margin:0; font-weight:900; color:var(--text);
+    /* гибкая типографика */
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    letter-spacing: clamp(6px, 3vw, 12px);
+    text-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 40px rgba(0,229,229,0.08);
+  }
+  p.lead{
+    margin-top:14px; color:var(--muted); font-weight:400;
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
   }
 
-  .cards-section{padding:120px 20px;background:#0a0a0a;text-align:center}
-  .cards-section h2{font-size:3.3rem;margin-bottom:80px;letter-spacing:5px}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:50px;max-width:1400px;margin:auto}
-  .card{background:#fff;color:#000;border-radius:32px;overflow:hidden;
-    box-shadow:0 30px 80px rgba(0,0,0,0.6);transition:all .6s}
-  .card:hover{transform:translateY(-25px) scale(1.02)}
-  .card img{width:100%;height:300px;object-fit:cover;transition:.8s}
-  .card:hover img{transform:scale(1.12)}
-  .card h3{padding:38px 20px;font-size:2.1rem;font-weight:800}
+  .cta-row{ margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; z-index:2; }
+  .btn{ display:inline-block; padding:12px 18px; border-radius:12px; font-weight:700; letter-spacing:0.6px; transition:transform .18s ease, box-shadow .18s ease; }
+  .btn-primary{ background:linear-gradient(90deg,var(--accent), #00ffd9); color:#021212; box-shadow:0 10px 30px var(--accent-weak); }
+  .btn-ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--text); }
 
-  footer{background:#000;padding:100px 20px;text-align:center;color:#aaa;font-size:1.25rem;border-top:1px solid #222}
+  /* ===== Секции карточек ===== */
+  .cards-section{ padding:80px 20px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.02)); text-align:center; }
+  .cards-section h2{ font-size: clamp(1.6rem, 4.2vw, 2.8rem); margin-bottom:40px; letter-spacing:4px; color:var(--text); }
+  .cards{ max-width:var(--max-width); margin:0 auto; display:grid; gap:28px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card{ background: linear-gradient(180deg, #ffffff, #f6f6f6); color:#0b0c0d; border-radius:18px; overflow:hidden; box-shadow:0 20px 50px rgba(2,6,8,0.45); transition:transform .45s cubic-bezier(.2,.9,.2,1); }
+  .card:hover{ transform: translateY(-12px); }
+  .card img{ width:100%; height:220px; object-fit:cover; display:block; }
+  .card h3{ margin:18px; font-size:1.15rem; font-weight:800; }
 
-  /* === МОБИЛЬНАЯ ВЕРСИЯ === */
-  @media (max-width: 768px) {
-    .burger{display:block}
-    .nav-links{display:none}
-    
-    h1{font-size:5rem;letter-spacing:6px}
-    header p{font-size:1.7rem}
-    main{padding-top:100px}
+  /* ===== Футер ===== */
+  footer{ padding:60px 20px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,0.03); }
+  footer a{ color:var(--accent); font-weight:700 }
+
+  /* ===== Ограничения ширины контента ===== */
+  .container{ max-width:var(--max-width); margin:0 auto; width:100%; padding:0 18px; }
+
+  /* ===== Адаптивность ===== */
+  @media (max-width: 1024px){
+    header{ background-attachment: scroll; } /* выключаем fixed на планшетах и ниже */
   }
-  @media (max-width: 480px) {
-    h1{font-size:4.2rem}
-    header p{font-size:1.5rem}
-    .mobile-menu a{font-size:2.2rem}
+
+  @media (max-width: 768px){
+    .nav-links{ display:none; }
+    .burger{ display:block; }
+    .brand{ font-size:0.98rem; }
+    header{ min-height:76vh; padding:14px 12px; }
+    .card img{ height:200px; }
+    .cards-section{ padding:56px 16px; }
   }
+
+  @media (max-width: 420px){
+    .mobile-menu a{ font-size:1.8rem; }
+    .card img{ height:180px; }
+    .cards{ gap:18px; grid-template-columns: 1fr; }
+    .cta-row{ flex-direction:column; gap:8px; }
+  }
+
+  /* Фокусные стили для доступности */
+  a:focus, button:focus { outline: 3px solid rgba(0,229,229,0.12); outline-offset:4px; border-radius:8px; }
+
+  /* Мелкие улучшения для красоты */
+  .muted-small{ color:var(--muted); font-size:0.95rem; }
 </style>
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="nav-container">
-    <div class="burger" id="burger">
+<!-- NAV -->
+<nav class="topnav" id="topnav" role="navigation" aria-label="Главная навигация">
+  <div class="nav-container container">
+    <div class="brand" aria-hidden="false">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Боконбаево</span>
+    </div>
+
+    <div class="nav-links" id="navLinks" role="menubar" aria-hidden="false">
+      <a href="index.html" role="menuitem">ГЛАВНАЯ</a>
+      <a href="hotels.html" role="menuitem">ОТЕЛИ</a>
+      <a href="places.html" role="menuitem">МЕСТА</a>
+      <a href="activities.html" role="menuitem">РАЗВЛЕЧЕНИЯ</a>
+      <a href="contacts.html" role="menuitem">КОНТАКТЫ</a>
+    </div>
+
+    <button class="burger" id="burger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Открыть меню">
       <span></span><span></span><span></span>
-    </div>
-    <div class="nav-links">
-      <a href="index.html">ГЛАВНАЯ</a>
-      <a href="hotels.html">ОТЕЛИ</a>
-      <a href="places.html">МЕСТА</a>
-      <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
-      <a href="contacts.html">КОНТАКТЫ</a>
-    </div>
+    </button>
   </div>
 </nav>
 
-<!-- Полноэкранное мобильное меню -->
-<div class="mobile-menu" id="mobileMenu">
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <a href="index.html">ГЛАВНАЯ</a>
   <a href="hotels.html">ОТЕЛИ</a>
   <a href="places.html">МЕСТА</a>
@@ -169,49 +182,111 @@
 </div>
 
 <main>
+  <!-- HERO / HEADER -->
   <header>
-    <h1>БОКОНБАЕВО</h1>
-    <p>Самое душевное село южного берега Иссык-Куля</p>
-  </header>
+    <div class="hero container">
+      <h1 class="site-title">БОКОНБАЕВО</h1>
+      <p class="lead">Самое душевное село южного берега Иссык-Куля — туризм от местных жителей.</p>
 
-  <div class="cards-section">
-    <h2>Что вас ждёт в Боконбаево</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Беркут">
-        <h3>Охота с беркутом</h3>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Юрта">
-        <h3>Настоящие юрты</h3>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль">
-        <h3>Иссык-Куль в 15 минутах</h3>
+      <div class="cta-row" role="group" aria-label="Действия">
+        <a href="#cards" class="btn btn-primary">Узнать больше</a>
+        <a href="contacts.html" class="btn btn-ghost">Связаться</a>
       </div>
     </div>
-  </div>
+  </header>
 
+  <!-- CARDS -->
+  <section class="cards-section" id="cards">
+    <div class="container">
+      <h2>Что вас ждёт в Боконбаево</h2>
+
+      <div class="cards" aria-live="polite">
+        <article class="card" aria-labelledby="c1">
+          <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Охота с беркутом" loading="lazy">
+          <h3 id="c1">Охота с беркутом</h3>
+        </article>
+
+        <article class="card" aria-labelledby="c2">
+          <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Настоящие юрты" loading="lazy">
+          <h3 id="c2">Настоящие юрты</h3>
+        </article>
+
+        <article class="card" aria-labelledby="c3">
+          <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль" loading="lazy">
+          <h3 id="c3">Иссык-Куль в 15 минутах</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>Боконбаево 2025 • Туризм от местных жителей</p>
-    <p>WhatsApp: <a href="https://wa.me/996999123456" style="color:#00ffff">+996 ___ ___ ___</a></p>
+    <div class="container">
+      <p class="muted-small">Боконбаево 2025 • Туризм от местных жителей</p>
+      <p class="muted-small">WhatsApp: <a href="https://wa.me/996999123456">+996 ___ ___ ___</a></p>
+    </div>
   </footer>
 </main>
 
 <script>
-  const burger = document.getElementById('burger');
-  const mobileMenu = document.getElementById('mobileMenu');
+  // ===== Меню-бургер =====
+  (function(){
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const topnav = document.getElementById('topnav');
 
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-  });
+    burger.addEventListener('click', () => {
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('active');
+      mobileMenu.setAttribute('aria-hidden', String(expanded));
+      document.body.style.overflow = !expanded ? 'hidden' : '';
+    });
 
-  // Сжатие шапки при скролле
-  window.addEventListener('scroll', () => {
-    document.querySelector('.topnav').classList.toggle('scrolled', window.scrollY > 80);
-  });
+    // Закрыть меню по клику на ссылку (мобильные)
+    mobileMenu.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A'){
+        mobileMenu.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  })();
+
+  // ===== Поведение шапки: скрывать при скролле вниз, показывать при скролле вверх =====
+  (function(){
+    const topnav = document.getElementById('topnav');
+    let lastScroll = window.scrollY || 0;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if(!ticking){
+        window.requestAnimationFrame(() => {
+          const current = window.scrollY || 0;
+          // Добавляем класс scrolled при прокрутке вниз (немного смягчаем)
+          topnav.classList.toggle('scrolled', current > 60);
+
+          if(current > lastScroll && current > 120){
+            // скролл вниз
+            topnav.classList.add('hidden');
+          } else {
+            // скролл вверх
+            topnav.classList.remove('hidden');
+          }
+          lastScroll = current <= 0 ? 0 : current;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+
+  // ===== Небольшой полифилл для iOS: предотвращаем "прыжок" фона =====
+  (function(){
+    // Ничего не делаем — фон отключается на планшетах и мобильных через CSS (background-attachment: scroll)
+  })();
 </script>
+
 </body>
 </html>
