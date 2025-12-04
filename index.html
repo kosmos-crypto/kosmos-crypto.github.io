@@ -1,140 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Боконбаево • Иссык-Куль</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Google Sans',Arial,sans-serif;background:#f8f9fa;color:#fff;overflow-x:hidden}
-
-        /* Навбар — тонкий, прозрачный, только логотип и гамбургер */
-        nav{
-            position:fixed;top:0;left:0;width:100%;z-index:1000;
-            background:rgba(0,0,0,0.7);backdrop-filter:blur(20px);
-            padding:18px 20px;display:flex;justify-content:space-between;align-items:center;
-        }
-        .logo{
-            font-size:1.9rem;font-weight:900;letter-spacing:2px;
-            color:white;text-shadow:0 0 15px #00ffff;
-        }
-        .hamburger{
-            font-size:2.2rem;cursor:pointer;color:white;
-        }
-
-        /* Полноэкранное мобильное меню */
-        .mobile-menu{
-            position:fixed;top:0;left:0;width:100%;height:100vh;
-            background:rgba(0,0,0,0.98);z-index:999;
-            display:flex;flex-direction:column;justify-content:center;align-items:center;gap:45px;
-            font-size:2.2rem;font-weight:700;transform:translateX(100%);
-            transition:0.5s cubic-bezier(0.77,0,0.18,1);
-        }
-        .mobile-menu.active{transform:translateX(0)}
-        .mobile-menu a{
-            color:white;text-decoration:none;position:relative;
-        }
-        .mobile-menu a::after{
-            content:'';position:absolute;bottom:-10px;left:50%;width:0;height:4px;
-            background:#00ffff;transition:0.4s;transform:translateX(-50%);
-        }
-        .mobile-menu a:hover::after{width:70%}
-
-        /* Главный экран */
-        header{
-            background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat fixed;
-            height:100vh;display:flex;flex-direction:column;
-            justify-content:center;align-items:center;text-align:center;
-            position:relative;
-        }
-        header::before{
-            content:'';position:absolute;inset:0;
-            background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.75));
-        }
-        h1{
-            font-size:5.5rem;font-weight:900;letter-spacing:6px;
-            text-shadow:0 8px 40px rgba(0,0,0,0.9);z-index:2;
-        }
-        header p{
-            font-size:1.9rem;margin-top:20px;letter-spacing:1.5px;z-index:2;
-        }
-
-        .container{max-width:1200px;margin:0 auto;padding:100px 20px;text-align:center}
-        h2{font-size:2.8rem;margin-bottom:60px;font-weight:800;color:#222}
-        .cards{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;
-        }
-        .card{
-            background:white;border-radius:28px;overflow:hidden;
-            box-shadow:0 20px 50px rgba(0,0,0,0.15);transition:0.4s;
-            opacity:0;transform:translateY(50px);
-        }
-        .card.visible{opacity:1;transform:translateY(0);transition:0.8s}
-        .card:hover{transform:translateY(-15px)}
-        .card img{width:100%;height:260px;object-fit:cover}
-        .card h3{padding:30px;font-size:1.8rem;font-weight:700;color:#222}
-
-        footer{background:#000;color:#777;padding:80px 20px 40px;text-align:center}
-
-        @media (max-width:768px){
-            h1{font-size:4.2rem}
-            header p{font-size:1.6rem}
-        }
-        @media (max-width:480px){
-            h1{font-size:3.4rem}
-            header p{font-size:1.4rem}
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Боконбаево • Иссык-Куль</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#111;color:#fff}
+nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(15px);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.logo{font-size:1.9rem;font-weight:900}
+.hamburger{font-size:2rem;cursor:pointer}
+.menu{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:40px;font-size:2rem;transform:translateX(100%);transition:.4s}
+.menu.active{transform:translateX(0)}
+.menu a{color:#fff;text-decoration:none}
+header{background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover fixed;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+header::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,0.7))}
+h1{font-size:5.5rem;font-weight:900;letter-spacing:5px;text-shadow:0 5px 30px #000}
+p{font-size:1.8rem;margin-top:15px}
+.container{max-width:1100px;margin:auto;padding:100px 20px;text-align:center}
+h2{font-size:2.5rem;margin-bottom:50px;color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.card{background:#fff;color:#222;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.3);transition:.4s}
+.card:hover{transform:translateY(-15px)}
+.card img{width:100%;height:220px;object-fit:cover}
+.card h3{padding:25px;font-size:1.6rem;font-weight:700}
+footer{background:#000;padding:60px 20px;text-align:center;color:#888}
+@media(max-width:768px){
+  h1{font-size:4rem}p{font-size:1.5rem}
+}
+</style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">БОКОНБАЕВО</div>
-    <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('active')">☰</div>
+  <div class="logo">БОКОНБАЕВО</div>
+  <div class="hamburger" onclick="document.querySelector('.menu').classList.toggle('active')">Menu</div>
 </nav>
 
-<div class="mobile-menu">
-    <a href="index.html">ГЛАВНАЯ</a>
-    <a href="hotels.html">ОТЕЛИ</a>
-    <a href="places.html">МЕСТА</a>
-    <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
-    <a href="contacts.html">КОНТАКТЫ</a>
+<div class="menu">
+  <a href="index.html">Главная</a>
+  <a href="hotels.html">Отели</a>
+  <a href="places.html">Места</a>
+  <a href="activities.html">Развлечения</a>
+  <a href="contacts.html">Контакты</a>
 </div>
 
 <header>
-    <h1>БОКОНБАЕВО</h1>
-    <p>Самое душевное село южного берега Иссык-Куля</p>
+  <h1>БОКОНБАЕВО</h1>
+  <p>Самое душевное село южного берега Иссык-Куля</p>
 </header>
 
 <div class="container">
-    <h2>Почему к нам приезжают?</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt="">
-            <h3>Охота с беркутом</h3>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt="">
-            <h3>Настоящие юрты</h3>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt="">
-            <h3>Иссык-Куль в 15 минутах</h3>
-        </div>
-    </div>
+  <h2>Почему к нам приезжают?</h2>
+  <div class="cards">
+    <div class="card"><img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=800" alt=""><h3>Охота с беркутом</h3></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=800" alt=""><h3>Юрты</h3></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=800" alt=""><h3>Иссык-Куль рядом</h3></div>
+  </div>
 </div>
 
 <footer>
-    <p>Боконбаево 2025 • Туризм от местных</p>
-    <p>WhatsApp: +996 ___ ___ ___</p>
+  <p>Боконбаево 2025 • WhatsApp: +996 ___ ___ ___</p>
 </footer>
-
-<script>
-    // Анимация карточек
-    const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add('visible')), {threshold: 0.1});
-    document.querySelectorAll('.card').forEach(c => observer.observe(c));
-</script>
 
 </body>
 </html>
