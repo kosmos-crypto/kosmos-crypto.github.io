@@ -19,7 +19,7 @@ body{
 
 /* ===== HEADER ===== */
 header{
-  height:100dvh; /* правильная высота для всех устройств */
+  height:100svh;
   position:relative;
   display:flex;
   align-items:center;
@@ -35,7 +35,7 @@ header::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.45); /* улучшенный контраст */
+  background:rgba(0,0,0,0.45);
   backdrop-filter:brightness(0.85);
 }
 .hero{
@@ -53,7 +53,7 @@ h1{
   text-shadow:0 8px 40px rgba(0,0,0,0.8);
 }
 
-/* ===== MENU ===== */
+/* ===== DESKTOP MENU ===== */
 .main-menu{
   display:flex;
   justify-content:center;
@@ -72,6 +72,8 @@ h1{
   white-space:nowrap;
   padding:8px 0;
   transition:.3s;
+  text-decoration:none;
+  color:var(--text);
 }
 .main-menu a:hover{
   color:var(--accent);
@@ -139,9 +141,80 @@ footer a{
   font-weight:700;
 }
 
-/* ===== MOBILE FIXES ===== */
+/* ------------------------------ */
+/* ===== BURGER MENU ===== */
+/* ------------------------------ */
+
+.burger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  z-index:1000;
+  position:absolute;
+  top:25px;
+  right:25px;
+}
+.burger span{
+  width:28px;
+  height:3px;
+  background:white;
+  border-radius:3px;
+  transition:.3s;
+}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.92);
+  backdrop-filter:blur(8px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:35px;
+  font-size:2rem;
+  font-weight:700;
+  opacity:0;
+  pointer-events:none;
+  transition:.35s;
+  z-index:999;
+}
+.mobile-menu a{
+  color:white;
+  text-decoration:none;
+  transition:.3s;
+}
+.mobile-menu a:hover{
+  color:var(--accent);
+}
+
+.mobile-menu.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Animation */
+.burger.active span:nth-child(1){
+  transform:translateY(8px) rotate(45deg);
+}
+.burger.active span:nth-child(2){
+  opacity:0;
+}
+.burger.active span:nth-child(3){
+  transform:translateY(-8px) rotate(-45deg);
+}
+
+/* ===== SWITCH TO BURGER ===== */
 @media (max-width:480px){
-  h1{font-size:2.4rem;}
+  .main-menu{
+    display:none;
+  }
+  .burger{
+    display:flex;
+  }
+  h1{font-size:2.6rem;}
   .card img{height:180px;}
 }
 </style>
@@ -151,8 +224,18 @@ footer a{
 
 <header>
   <div class="hero">
+
+    <!-- Бургер -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Заголовок -->
     <h1>Иссык-Куль<br>Южный берег</h1>
 
+    <!-- Десктоп меню -->
     <nav class="main-menu">
       <a href="index.html">ГЛАВНАЯ</a>
       <a href="hotels.html">ОТЕЛИ</a>
@@ -160,8 +243,18 @@ footer a{
       <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
       <a href="contacts.html">КОНТАКТЫ</a>
     </nav>
+
   </div>
 </header>
+
+<!-- Мобильное меню -->
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">ГЛАВНАЯ</a>
+  <a href="hotels.html">ОТЕЛИ</a>
+  <a href="places.html">МЕСТА</a>
+  <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
+  <a href="contacts.html">КОНТАКТЫ</a>
+</nav>
 
 <section class="cards-section">
   <h2>Что вас ждёт на Южном берегу</h2>
@@ -188,6 +281,16 @@ footer a{
   <p>Иссык-Куль • Южный берег 2025</p>
   <p>WhatsApp: <a href="https://wa.me/996999123456">+996 ___ ___ ___</a></p>
 </footer>
+
+<script>
+const burger = document.getElementById("burger");
+const menu = document.getElementById("mobile-menu");
+
+burger.onclick = () => {
+  burger.classList.toggle("active");
+  menu.classList.toggle("active");
+};
+</script>
 
 </body>
 </html>
