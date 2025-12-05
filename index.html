@@ -2,97 +2,151 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
-<meta name="description" content="Иссык-Куль • Южный берег — отдых и туризм">
+
 <style>
-  :root{--accent:#00e5e5;--text:#e9eef0;--bg:#0b0c0d}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    background:var(--bg);color:var(--text);min-height:100vh;
-  }
-  a{text-decoration:none;color:inherit}
+:root{
+  --accent:#00e5e5;
+  --text:#f2f7f8;
+  --bg:#0b0c0d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background:var(--bg);color:var(--text);
+}
 
-  /* ======== HEADER ========= */
-  header{
-    min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;position:relative;
-    background-image:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg');
-    background-size:cover;background-position:center;
-    background-attachment:fixed;
-  }
-  header::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(3,4,4,0.2),rgba(3,4,4,0.75));
-  }
-  .hero{position:relative;z-index:2;padding:0 20px}
+/* ===== HEADER ===== */
+header{
+  height:100dvh; /* правильная высота для всех устройств */
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 
-  h1{
-    font-size:clamp(3.5rem,14vw,9rem);font-weight:900;
-    letter-spacing:clamp(6px,4vw,20px);text-shadow:0 10px 50px rgba(0,0,0,0.8);
-    margin-bottom:80px;
-    line-height:1.1;
-  }
+  background-image:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45); /* улучшенный контраст */
+  backdrop-filter:brightness(0.85);
+}
+.hero{
+  position:relative;
+  z-index:2;
+}
 
-  /* ======== ГОРИЗОНТАЛЬНОЕ МЕНЮ (ПК = Мобилка одинаково) ========= */
-  .main-menu{
-    display:flex;gap:clamp(20px, 5vw, 70px);flex-wrap:nowrap;justify-content:center;
-    font-size:clamp(1.1rem, 5vw, 2rem);font-weight:800;letter-spacing:2px;
-    overflow-x:auto;
-    padding:0 20px;
-    scrollbar-width:none;
-  }
-  .main-menu::-webkit-scrollbar {display:none;}
+/* ===== TITLE ===== */
+h1{
+  font-size:clamp(3rem, 10vw, 6rem);
+  font-weight:900;
+  letter-spacing:clamp(4px,1.5vw,16px);
+  line-height:1.1;
+  margin-bottom:40px;
+  text-shadow:0 8px 40px rgba(0,0,0,0.8);
+}
 
-  .main-menu a{
-    position:relative;padding:12px 0;transition:color .3s;white-space:nowrap;
-  }
-  .main-menu a::after{
-    content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-    width:0;height:4px;background:var(--accent);border-radius:4px;
-    transition:width .4s ease;box-shadow:0 0 25px rgba(0,229,229,0.5);
-  }
-  .main-menu a:hover{color:var(--accent)}
-  .main-menu a:hover::after{width:80%}
+/* ===== MENU ===== */
+.main-menu{
+  display:flex;
+  justify-content:center;
+  gap:clamp(20px,4vw,60px);
+  font-size:clamp(1.1rem,3vw,1.8rem);
+  font-weight:700;
 
-  /* ======== КАРТОЧКИ ========= */
-  .cards-section{padding:80px 20px;text-align:center;}
-  .cards-section h2{
-    font-size:clamp(1.8rem,7vw,3.5rem);margin-bottom:50px;letter-spacing:4px
-  }
-  .cards{
-    max-width:1400px;margin:0 auto;display:grid;gap:30px;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  }
-  .card{
-    background:#fff;color:#111;border-radius:24px;overflow:hidden;
-    box-shadow:0 25px 60px rgba(0,0,0,0.5);transition:transform .5s;
-  }
-  .card:hover{transform:translateY(-16px)}
-  .card img{width:100%;height:230px;object-fit:cover}
-  .card h3{margin:20px;font-size:1.3rem;font-weight:800;text-align:center}
+  overflow-x:auto;
+  padding:0 20px;
+  scrollbar-width:none;
+}
+.main-menu::-webkit-scrollbar{display:none}
 
-  footer{padding:50px 20px;text-align:center;font-size:1.1rem}
-  footer a{color:var(--accent);font-weight:700}
+.main-menu a{
+  position:relative;
+  white-space:nowrap;
+  padding:8px 0;
+  transition:.3s;
+}
+.main-menu a:hover{
+  color:var(--accent);
+}
+.main-menu a::after{
+  content:"";
+  position:absolute;
+  left:50%;bottom:0;
+  width:0;height:3px;
+  background:var(--accent);
+  border-radius:4px;
+  transform:translateX(-50%);
+  transition:.3s;
+}
+.main-menu a:hover::after{width:80%}
 
-  /* ======== МОБИЛЬНАЯ ОПТИМИЗАЦИЯ ========= */
-  /* Слабые телефоны отключают fixed */
-  @media (max-width:900px){
-    header{background-attachment:scroll}
-    h1{margin-bottom:60px;}
-    .cards-section{padding:60px 20px;}
-    .card img{height:200px;}
-  }
+/* ===== CARDS ===== */
+.cards-section{
+  padding:80px 20px;
+  text-align:center;
+}
+.cards-section h2{
+  font-size:clamp(2rem,6vw,3.5rem);
+  letter-spacing:4px;
+  margin-bottom:50px;
+}
 
-  @media (max-width:480px){
-    h1{font-size:2.8rem;letter-spacing:4px}
-    .main-menu{gap:25px;font-size:1.1rem}
-    .card img{height:180px;}
-  }
+.cards{
+  display:grid;
+  gap:30px;
+  max-width:1300px;
+  margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
 
+.card{
+  background:#fff;color:#111;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,0.45);
+  transition:transform .3s;
+}
+.card:hover{
+  transform:translateY(-10px);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+.card h3{
+  padding:20px;
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  padding:60px 20px;
+  text-align:center;
+  font-size:1.1rem;
+}
+footer a{
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* ===== MOBILE FIXES ===== */
+@media (max-width:480px){
+  h1{font-size:2.4rem;}
+  .card img{height:180px;}
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -111,17 +165,20 @@
 
 <section class="cards-section">
   <h2>Что вас ждёт на Южном берегу</h2>
+
   <div class="cards">
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Охота с беркутом">
+      <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop">
       <h3>Охота с беркутом</h3>
     </div>
+
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Настоящие юрты">
+      <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop">
       <h3>Настоящие юрты</h3>
     </div>
+
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль">
+      <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop">
       <h3>Иссык-Куль в 15 минутах</h3>
     </div>
   </div>
