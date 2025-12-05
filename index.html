@@ -1,117 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Иссык-Куль • Южный берег</title>
-<meta name="description" content="Иссык-Куль • Южный берег — отдых и туризм">
-<style>
-  :root{--accent:#00e5e5;--text:#e9eef0;--bg:#0b0c0d}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    background:var(--bg);color:var(--text);height:100vh;overflow-x:hidden;
-  }
-  a{text-decoration:none;color:inherit}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0d">
+  <title>Иссык-Куль • Южный берег — Отдых и туризм</title>
+  <meta name="description" content="Иссык-Куль • Южный берег — путеводитель: отели, развлечения, экскурсии, юрты и охота с беркутом.">
+  <link rel="icon" href="/favicon.ico">
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#00e5e5;--text:#e9eef0;--muted:#b9c3c6;--bg:#0b0c0d;--card-bg:#ffffff;--card-text:#111;
+      --radius:24px;--page-padding:20px;--max-width:1400px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;line-height:1.45;
+    }
 
-  header{
-    height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;position:relative;
-    background-image:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg');
-    background-size:cover;background-position:center;background-attachment:fixed;
-  }
-  header::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(3,4,4,0.2),rgba(3,4,4,0.75));
-  }
+    /* skip link for accessibility */
+    .skip-link{position:absolute;left:8px;top:8px;background:#fff;color:#000;padding:8px 12px;border-radius:8px;z-index:999;transform:translateY(-120%);transition:transform .2s}
+    .skip-link:focus{transform:none}
 
-  .hero{position:relative;z-index:2;padding:0 20px}
+    header{
+      min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+      color:var(--text);text-align:center;padding:var(--page-padding);
+    }
+    /* lazy background with low-res placeholder technique */
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.65);will-change:transform;}
+    .hero-inner{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:40px 20px}
 
-  h1{
-    font-size:clamp(4rem,12vw,9rem);font-weight:900;
-    letter-spacing:clamp(8px,4vw,20px);text-shadow:0 10px 50px rgba(0,0,0,0.8);
-    margin-bottom:80px;
-  }
+    h1{font-weight:900;margin:0 0 36px;line-height:0.9;letter-spacing:6px;font-size:clamp(2.4rem,8vw,5.5rem)}
+    .tagline{font-weight:600;color:var(--muted);margin-bottom:28px}
 
-  /* Меню вместо кнопок */
-  .main-menu{
-    display:flex;gap:clamp(20px,5vw,50px);flex-wrap:wrap;justify-content:center;
-    font-size:clamp(1.1rem,2.8vw,1.8rem);font-weight:800;letter-spacing:2px;
-  }
-  .main-menu a{
-    position:relative;padding:10px 0;transition:color .3s;
-  }
-  .main-menu a::after{
-    content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-    width:0;height:4px;background:var(--accent);border-radius:4px;
-    transition:width .4s ease;box-shadow:0 0 20px rgba(0,229,229,0.4);
-  }
-  .main-menu a:hover{color:var(--accent)}
-  .main-menu a:hover::after{width:80%}
+    /* Menu / nav */
+    nav.main-menu{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;align-items:center}
+    nav.main-menu a{position:relative;padding:10px 6px;font-weight:800;letter-spacing:1px;color:inherit}
+    nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:0;height:3px;background:var(--accent);border-radius:4px;transition:width .28s}
+    nav.main-menu a:hover{color:var(--accent)}
+    nav.main-menu a:hover::after{width:70%}
 
-  /* Остальной контент (карточки и футер) */
-  .cards-section{padding:100px 20px;text-align:center;background:rgba(0,0,0,0.03)}
-  .cards-section h2{font-size:clamp(2.2rem,6vw,3.5rem);margin-bottom:60px;letter-spacing:5px}
-  .cards{
-    max-width:1400px;margin:0 auto;display:grid;gap:40px;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  }
-  .card{
-    background:#fff;color:#111;border-radius:24px;overflow:hidden;
-    box-shadow:0 25px 60px rgba(0,0,0,0.5);transition:transform .5s;
-  }
-  .card:hover{transform:translateY(-16px)}
-  .card img{width:100%;height:260px;object-fit:cover}
-  .card h3{margin:24px;font-size:1.4rem;font-weight:800}
+    /* mobile menu button */
+    .menu-toggle{display:none;position:fixed;right:20px;top:20px;z-index:60;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);border-radius:12px;padding:8px}
+    .menu-toggle button{border:0;background:transparent;color:var(--text);font-weight:700;padding:6px 10px}
 
-  footer{padding:80px 20px;text-align:center;font-size:1.1rem}
-  footer a{color:var(--accent);font-weight:700}
+    /* Cards section */
+    .cards-section{padding:80px var(--page-padding);background:linear-gradient(0deg, rgba(255,255,255,0.02), transparent)}
+    .container{max-width:var(--max-width);margin:0 auto}
+    .cards-section h2{font-size:clamp(1.6rem,4vw,2.8rem);margin-bottom:36px;letter-spacing:4px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
 
-  @media (max-width:1024px){header{background-attachment:scroll}}
-  @media (max-width:640px){
-    .main-menu{flex-direction:column;gap:30px}
-    .main-menu a{font-size:1.6rem}
-  }
-</style>
+    .card{background:var(--card-bg);color:var(--card-text);border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);transition:transform .36s,box-shadow .36s}
+    .card:focus-within,.card:hover{transform:translateY(-12px);box-shadow:0 30px 70px rgba(0,0,0,.55)}
+    .card figure{margin:0;height:220px;overflow:hidden}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .card .card-body{padding:18px}
+    .card h3{margin:0 0 8px;font-size:1.15rem}
+    .card p{margin:0;color:#555;font-size:.95rem}
+    .card .cta{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none}
+
+    footer{padding:48px 20px;text-align:center;color:var(--muted)}
+    footer a{color:var(--accent);font-weight:700}
+
+    /* responsive tweaks */
+    @media (max-width:900px){
+      .menu-toggle{display:block}
+      nav.main-menu{position:fixed;right:12px;top:68px;background:rgba(10,10,11,.92);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:6px;align-items:center;transform:translateY(-8px);box-shadow:0 10px 40px rgba(0,0,0,.6)}
+    }
+
+    @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
 
-<header>
-  <div class="hero">
-    <h1>Иссык-Куль<br>Южный берег</h1>
+  <header aria-label="Главный баннер">
+    <div id="hero-bg" class="hero-bg" aria-hidden="true"></div>
 
-    <nav class="main-menu">
-      <a href="index.html">ГЛАВНАЯ</a>
-      <a href="hotels.html">ОТЕЛИ</a>
-      <a href="places.html">МЕСТА</a>
-      <a href="activities.html">РАЗВЛЕЧЕНИЯ</a>
-      <a href="contacts.html">КОНТАКТЫ</a>
-    </nav>
-  </div>
-</header>
+    <div class="hero-inner container">
+      <h1>Иссык-Куль<br>Южный берег</h1>
+      <p class="tagline">Отели • Места • Развлечения — всё для вашего отдыха</p>
 
-<section class="cards-section">
-  <h2>Что вас ждёт на Южном берегу</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" alt="Охота с беркутом">
-      <h3>Охота с беркутом</h3>
+      <div class="menu-toggle" aria-hidden="false">
+        <button id="open-menu" aria-expanded="false" aria-controls="main-nav">Меню ☰</button>
+      </div>
+
+      <nav id="main-nav" class="main-menu" role="navigation" aria-label="Главное меню">
+        <a href="index.html">Главная</a>
+        <a href="hotels.html">Отели</a>
+        <a href="places.html">Места</a>
+        <a href="activities.html">Развлечения</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" alt="Настоящие юрты">
-      <h3>Настоящие юрты</h3>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" alt="Иссык-Куль">
-      <h3>Иссык-Куль в 15 минутах</h3>
-    </div>
-  </div>
-</section>
+  </header>
 
-<footer>
-  <p>Иссык-Куль • Южный берег 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 ___ ___ ___</a></p>
-</footer>
+  <main id="main" tabindex="-1">
+    <section class="cards-section">
+      <div class="container">
+        <h2>Что вас ждёт на Южном берегу</h2>
+        <div class="cards" role="list">
 
+          <article class="card" role="listitem" aria-labelledby="c1-title">
+            <figure>
+              <img loading="lazy" alt="Охота с беркутом" src="https://images.unsplash.com/photo-1586105254027-2f2c3f8e1e7f?w=1200&auto=format&fit=crop" width="1200" height="700">
+            </figure>
+            <div class="card-body">
+              <h3 id="c1-title">Охота с беркутом</h3>
+              <p>Традиционные демонстрации соколиной охоты и фотосессии с птицами.</p>
+              <a class="cta" href="activities.html#berkut">Подробнее →</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" aria-labelledby="c2-title">
+            <figure>
+              <img loading="lazy" alt="Юрты у озера" src="https://images.unsplash.com/photo-1565084888279-9d66b8f0dd9b?w=1200&auto=format&fit=crop" width="1200" height="700">
+            </figure>
+            <div class="card-body">
+              <h3 id="c2-title">Настоящие юрты</h3>
+              <p>Ночь в юрте — тёплая атмосфера, звёздное небо и местная кухня.</p>
+              <a class="cta" href="places.html#yurts">Забронировать</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" aria-labelledby="c3-title">
+            <figure>
+              <img loading="lazy" alt="Берег Иссык-Куля" src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop" width="1200" height="700">
+            </figure>
+            <div class="card-body">
+              <h3 id="c3-title">Иссык-Куль в 15 минутах</h3>
+              <p>Чистые пляжи, прогулки и водные развлечения рядом.</p>
+              <a class="cta" href="places.html#lake">Как добраться</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="container" aria-label="Контакты и карта" style="padding:36px 20px 80px">
+      <h2 style="margin-bottom:12px">Контакты</h2>
+      <p style="color:var(--muted)">WhatsApp: <a href="https://wa.me/996999123456">+996 999 123 456</a></p>
+      <p style="color:var(--muted);margin-top:12px">Адрес: Южный берег, Иссык-Кульская область</p>
+      <!-- Простая встройка карты (замените ссылку на реальную) -->
+      <div style="margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5)">
+        <iframe title="Карта Южный берег" src="https://www.openstreetmap.org/export/embed.html?bbox=76.0%2C42.3%2C77.5%2C42.9&amp;layer=mapnik" style="width:100%;height:320px;border:0;display:block" loading="lazy" fetchpriority="low"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Иссык-Куль • Южный берег — Все права защищены</p>
+      <p>Разработка — <a href="https://kalybek.github.io" target="_blank" rel="noopener">Kalybek</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // progressive hero background loading (low-res -> high-res)
+    (function(){
+      const el = document.getElementById('hero-bg');
+      const low = 'https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul-small.jpg';
+      const high = 'https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg';
+      // apply low-res immediately for perceived performance
+      el.style.backgroundImage = `url("${low}")`;
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+      // load high-res in background
+      const img = new Image(); img.src = high; img.onload = ()=>{el.style.backgroundImage = `url("${high}")`;};
+    })();
+
+    // mobile menu toggle
+    (function(){
+      const btn = document.getElementById('open-menu');
+      const nav = document.getElementById('main-nav');
+      let open = false;
+      btn.addEventListener('click', ()=>{
+        open = !open; btn.setAttribute('aria-expanded', String(open));
+        nav.style.display = open? 'flex' : 'none';
+      });
+      // hide nav on wider screens
+      const mq = window.matchMedia('(min-width:901px)');
+      function up(e){ if(e.matches){ nav.style.display='flex'; btn.setAttribute('aria-expanded','false') } }
+      mq.addListener(up); up(mq);
+    })();
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Small accessibility: enable keyboard focus for cards
+    document.querySelectorAll('.card').forEach(c=>c.setAttribute('tabindex','0'));
+  </script>
+
+  <!-- Structured data (so search engines understand the page) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Иссык-Куль • Южный берег",
+    "url": "https://your-domain.example/",
+    "description": "Путеводитель по Южному берегу Иссык-Куля: отели, места и развлечения."
+  }
+  </script>
 </body>
 </html>
