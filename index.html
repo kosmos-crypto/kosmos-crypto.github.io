@@ -16,13 +16,11 @@ nav.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relativ
 nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--a);border-radius:4px;transform:translateX(-50%);transition:.4s}
 nav.main-menu a:hover{color:var(--a)}
 nav.main-menu a:hover::after{width:90%}
-
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
 .modal.active{opacity:1;pointer-events:auto}
 .modal-content{background:#111;max-width:1350px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:80px 40px 60px;position:relative;box-shadow:0 40px 120px rgba(0,229,229,.45)}
 .close{position:absolute;top:15px;right:30px;font-size:4.5rem;color:#888;cursor:pointer;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
 .close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
-
 .grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
 .hotel-card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
 .hotel-card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
@@ -33,7 +31,6 @@ nav.main-menu a:hover::after{width:90%}
 .price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
 .btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
 .btn:hover{background:#fff;transform:scale(1.07)}
-
 .burger{display:none;position:fixed;top:30px;right:25px;z-index:10001;cursor:pointer}
 .burger span{display:block;width:35px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
 .burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
@@ -43,14 +40,56 @@ nav.main-menu a:hover::after{width:90%}
 .mobile-menu.active{opacity:1;pointer-events:auto}
 .mobile-menu a{color:white}
 .mobile-menu a:hover{color:var(--a)}
-
 footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
 footer a{color:var(--a);font-weight:700;text-decoration:none}
 @media(max-width:768px){.main-menu{display:none}.burger{display:block}}
+
+/* ==============================
+   НОВАЯ ГОЛУБАЯ ТЕМА ТОЛЬКО В МОДАЛКАХ
+   ============================== */
+.modal-content{
+  background: linear-gradient(135deg, #001122, #002233) !important;
+  border: 2px solid #00ccff !important;
+  box-shadow: 0 0 80px rgba(0,204,255,0.5) !important;
+}
+.modal-content h2,
+.info h3{
+  color: #00ffff !important;
+  text-shadow: 0 0 25px #00ffff, 0 0 50px #0099ff !important;
+  font-weight:900 !important;
+}
+.info p{
+  color: #a0f0ff !important;
+  font-size:1.1rem !important;
+}
+.price{
+  color: #00ffea !important;
+  font-size:1.7rem !important;
+  font-weight:900 !important;
+  text-shadow: 0 0 20px #00ffea !important;
+}
+.btn{
+  background: linear-gradient(45deg, #00ccff, #0099ff) !important;
+  color: #000 !important;
+  box-shadow: 0 0 30px rgba(0,204,255,0.8) !important;
+}
+.btn:hover{
+  background: #00ffff !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 0 50px #00ffff !important;
+}
+.hotel-card{
+  background: linear-gradient(135deg, #001f33, #002b44) !important;
+  border: 1px solid #00ccff44 !important;
+  box-shadow: 0 20px 60px #000000cc, 0 0 30px rgba(0,204,255,0.3) !important;
+}
+.hotel-card:hover{
+  border-color: #00ffff !important;
+  box-shadow: 0 35px 90px rgba(0,204,255,0.6) !important;
+}
 </style>
 </head>
 <body>
-
 <header>
   <div class="hero">
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
@@ -63,26 +102,22 @@ footer a{color:var(--a);font-weight:700;text-decoration:none}
     </nav>
   </div>
 </header>
-
 <nav class="mobile-menu" id="mobileMenu">
   <a data-file="hotels.html">ОТЕЛИ</a>
   <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
   <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
   <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
 </nav>
-
 <div class="modal" id="mainModal">
   <div class="modal-content">
     <span class="close">×</span>
     <div id="modalBody"></div>
   </div>
 </div>
-
 <footer>
   <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 709 10 00 20 </a></p>
+  <p>WhatsApp: <a href="https://wa.me/996709100020">+996 709 10 00 20</a></p>
 </footer>
-
 <script>
 document.querySelectorAll('[data-file]').forEach(a => {
   a.onclick = async () => {
@@ -100,14 +135,12 @@ document.querySelectorAll('[data-file]').forEach(a => {
     document.body.style.overflow = 'hidden';
   };
 });
-
 document.querySelector('.modal').onclick = e => {
   if (e.target === document.querySelector('.modal') || e.target.classList.contains('close')) {
     document.querySelector('.modal').classList.remove('active');
     document.body.style.overflow = '';
   }
 };
-
 document.getElementById('burger').onclick = () => {
   document.getElementById('burger').classList.toggle('active');
   document.getElementById('mobileMenu').classList.toggle('active');
