@@ -5,169 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
 <style>
+:root{--a:#00e5e5;--b:#0b0d}
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Inter,"Segoe UI",sans-serif;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-  height:100vh;
-}
+body{font-family:Inter,"Segoe UI",sans-serif;background:var(--b);color:#f2f7f8;overflow-x:hidden}
+header{height:100vh;min-height:620px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.85))}
+h1{font-size:clamp(3.6rem,11vw,7.5rem);font-weight:900;color:white;text-shadow:0 10px 40px #000;letter-spacing:9px;line-height:1.1}
+nav.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(35px,7vw,110px);margin-top:60px;font-weight:700;font-size:clamp(1.5rem,4vw,2.2rem)}
+nav.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer}
+nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--a);border-radius:4px;transform:translateX(-50%);transition:.4s}
+nav.main-menu a:hover{color:var(--a)}
+nav.main-menu a:hover::after{width:90%}
 
-/* Главная — только фото Иссык-Куля */
-header{
-  position:fixed;
-  inset:0;
-  background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;
-}
-
-/* Плавающие кнопки внизу */
-.menu{
-  position:fixed;
-  bottom:40px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  justify-content:center;
-  z-index:100;
-}
-.menu a{
-  background:rgba(0,0,0,0.6);
-  color:white;
-  padding:16px 32px;
-  border-radius:50px;
-  font-weight:800;
-  font-size:1.3rem;
-  text-decoration:none;
-  backdrop-filter:blur(10px);
-  border:2px solid rgba(0,255,255,0.4);
-  transition:.4s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-.menu a:hover{
-  background:#00ffff;
-  color:#000;
-  transform:scale(1.1);
-  box-shadow:0 15px 40px rgba(0,255,255,0.5);
-}
-
-/* Яркие модалки */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.94);
-  backdrop-filter:blur(16px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  opacity:0;
-  pointer-events:none;
-  transition:.6s;
-  z-index:1000;
-  overflow-y:auto;
-}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
 .modal.active{opacity:1;pointer-events:auto}
-.modal-content{
-  background:#fff;
-  color:#000;
-  max-width:1400px;
-  width:100%;
-  max-height:95vh;
-  overflow-y:auto;
-  border-radius:36px;
-  padding:90px 50px 70px;
-  position:relative;
-  box-shadow:0 30px 120px rgba(0,212,255,0.5);
-}
-.close{
-  position:absolute;
-  top:20px;right:35px;
-  font-size:5rem;
-  color:#00aaff;
-  width:80px;height:80px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:rgba(0,212,255,0.1);
-  cursor:pointer;
-  transition:.4s;
-}
-.close:hover{
-  color:#fff;
-  background:#00ffff;
-  transform:rotate(90deg);
-}
+.modal-content{background:#111;max-width:1350px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:80px 40px 60px;position:relative;box-shadow:0 40px 120px rgba(0,229,229,.45)}
+.close{position:absolute;top:15px;right:30px;font-size:4.5rem;color:#888;cursor:pointer;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
+.close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
 
-.grid{
-  display:grid;
-  gap:50px;
-  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
-}
-.hotel-card{
-  background:#fff;
-  border-radius:32px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,212,255,0.25);
-  transition:.5s;
-}
-.hotel-card:hover{
-  transform:translateY(-20px);
-  box-shadow:0 40px 100px rgba(0,212,255,0.45);
-}
-.hotel-card img{
-  width:100%;height:300px;object-fit:cover;transition:.8s;
-}
-.hotel-card:hover img{transform:scale(1.15)}
-.info h3{
-  font-size:2rem;color:#0066cc;padding:35px 35px 12px;font-weight:900;
-}
-.info p{
-  padding:0 35px 20px;font-size:1.2rem;color:#333;line-height:1.7;
-}
-.price{
-  font-size:1.9rem;font-weight:900;color:#0066cc;padding:0 35px 30px;
-}
-.btn{
-  display:inline-block;
-  background:linear-gradient(45deg,#00d4ff,#00ffff);
-  color:#000;
-  font-weight:900;
-  padding:20px 55px;
-  border-radius:60px;
-  margin:0 35px 40px;
-  font-size:1.3rem;
-  transition:.4s;
-  box-shadow:0 10px 40px rgba(0,212,255,0.5);
-}
-.btn:hover{
-  background:#00ffff;
-  transform:scale(1.12);
-  box-shadow:0 20px 60px rgba(0,255,255,0.8);
-}
+.grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.hotel-card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
+.hotel-card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
+.hotel-card img{width:100%;height:270px;object-fit:cover;transition:.7s}
+.hotel-card:hover img{transform:scale(1.1)}
+.info h3{font-size:1.6rem;color:var(--a);padding:25px 25px 8px}
+.info p{padding:0 25px 15px;line-height:1.55}
+.price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
+.btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
+.btn:hover{background:#fff;transform:scale(1.07)}
+
+.burger{display:none;position:fixed;top:30px;right:25px;z-index:10001;cursor:pointer}
+.burger span{display:block;width:35px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
+.burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
+.burger.active span:nth-child(2){opacity:0}
+.burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:#000000fa;backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;font-size:2.7rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:10000}
+.mobile-menu.active{opacity:1;pointer-events:auto}
+.mobile-menu a{color:white}
+.mobile-menu a:hover{color:var(--a)}
+
+footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
+footer a{color:var(--a);font-weight:700;text-decoration:none}
+@media(max-width:768px){.main-menu{display:none}.burger{display:block}}
 </style>
 </head>
 <body>
 
-<!-- Только фото Иссык-Куля -->
-<header></header>
+<header>
+  <div class="hero">
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    <h1>Иссык-Куль<br>Южный берег</h1>
+    <nav class="main-menu">
+      <a data-file="hotels.html">ОТЕЛИ</a>
+      <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+      <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+      <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
+    </nav>
+  </div>
+</header>
 
-<!-- Кнопки внизу экрана -->
-<div class="menu">
+<nav class="mobile-menu" id="mobileMenu">
   <a data-file="hotels.html">ОТЕЛИ</a>
   <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
   <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
   <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
-</div>
+</nav>
 
-<!-- Одна универсальная модалка -->
 <div class="modal" id="mainModal">
   <div class="modal-content">
     <span class="close">×</span>
     <div id="modalBody"></div>
   </div>
 </div>
+
+<footer>
+  <p>Иссык-Куль • Южный берег © 2025</p>
+  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 709 10 00 20 </a></p>
+</footer>
 
 <script>
 document.querySelectorAll('[data-file]').forEach(a => {
@@ -180,7 +94,7 @@ document.querySelectorAll('[data-file]').forEach(a => {
       const html = await r.text();
       body.innerHTML = html;
     } catch {
-      body.innerHTML = '<p style="text-align:center;color:#f66;padding:150px;font-size:2rem">Файл не найден</p>';
+      body.innerHTML = '<p style="color:#f66;text-align:center;padding:100px">Файл не найден</p>';
     }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -192,6 +106,12 @@ document.querySelector('.modal').onclick = e => {
     document.querySelector('.modal').classList.remove('active');
     document.body.style.overflow = '';
   }
+};
+
+document.getElementById('burger').onclick = () => {
+  document.getElementById('burger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
 };
 </script>
 </body>
