@@ -4,115 +4,367 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
+
 <style>
-:root{--a:#00e5e5;--b:#0b0d}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,"Segoe UI",sans-serif;background:var(--b);color:#f2f7f8;overflow-x:hidden}
-header{height:100vh;min-height:620px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.85))}
-h1{font-size:clamp(3.6rem,11vw,7.5rem);font-weight:900;color:white;text-shadow:0 10px 40px #000;letter-spacing:9px;line-height:1.1}
-nav.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(35px,7vw,110px);margin-top:60px;font-weight:700;font-size:clamp(1.5rem,4vw,2.2rem)}
-nav.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer}
-nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--a);border-radius:4px;transform:translateX(-50%);transition:.4s}
-nav.main-menu a:hover{color:var(--a)}
-nav.main-menu a:hover::after{width:90%}
+:root{
+  --accent:#00e5e5;
+  --bg:#0b0d0f;
+  --text:#f2f7f8;
+}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
-.modal.active{opacity:1;pointer-events:auto}
-.modal-content{background:#111;max-width:1350px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:80px 40px 60px;position:relative;box-shadow:0 40px 120px rgba(0,229,229,.45)}
-.close{position:absolute;top:15px;right:30px;font-size:4.5rem;color:#888;cursor:pointer;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
-.close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
+/* Сброс */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:Inter,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-.grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-.hotel-card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
-.hotel-card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
-.hotel-card img{width:100%;height:270px;object-fit:cover;transition:.7s}
-.hotel-card:hover img{transform:scale(1.1)}
-.info h3{font-size:1.6rem;color:var(--a);padding:25px 25px 8px}
-.info p{padding:0 25px 15px;line-height:1.55}
-.price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
-.btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
-.btn:hover{background:#fff;transform:scale(1.07)}
+/* ---------------- HEADER ---------------- */
+header{
+  height:100vh;
+  min-height:620px;
+  background:url("https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg") center/cover no-repeat;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-.burger{display:none;position:fixed;top:30px;right:25px;z-index:10001;cursor:pointer}
-.burger span{display:block;width:35px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
-.burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
-.burger.active span:nth-child(2){opacity:0}
-.burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;background:#000000fa;backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;font-size:2.7rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:10000}
-.mobile-menu.active{opacity:1;pointer-events:auto}
-.mobile-menu a{color:white}
-.mobile-menu a:hover{color:var(--a)}
+header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.82));
+}
 
-footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
-footer a{color:var(--a);font-weight:700;text-decoration:none}
-@media(max-width:768px){.main-menu{display:none}.burger{display:block}}
+/* Заголовок */
+h1{
+  font-size:clamp(3.4rem,10vw,7rem);
+  font-weight:900;
+  color:white;
+  text-shadow:0 10px 35px rgba(0,0,0,.95);
+  line-height:1.1;
+  letter-spacing:7px;
+  position:relative;
+  margin-top:-40px;
+}
+
+/* ----------- DESKTOP NAV ----------- */
+nav.main-menu{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:clamp(30px,6vw,90px);
+  margin-top:60px;
+  font-weight:700;
+  font-size:clamp(1.2rem,3.5vw,2rem);
+  position:relative;
+}
+
+nav.main-menu a{
+  color:white;
+  text-decoration:none;
+  letter-spacing:1px;
+  padding:10px 0;
+  cursor:pointer;
+  position:relative;
+}
+
+nav.main-menu a::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  height:3px;
+  width:0;
+  background:var(--accent);
+  border-radius:3px;
+  transform:translateX(-50%);
+  transition:.35s;
+}
+
+nav.main-menu a:hover{
+  color:var(--accent);
+}
+
+nav.main-menu a:hover::after{
+  width:80%;
+}
+
+/* ---------------- MODAL ---------------- */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.90);
+  backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:1000;
+}
+
+.modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal-content{
+  background:#111;
+  width:100%;
+  max-width:1250px;
+  max-height:92vh;
+  overflow-y:auto;
+  border-radius:24px;
+  padding:65px 35px 50px;
+  position:relative;
+  box-shadow:0 40px 110px rgba(0,229,229,.45);
+}
+
+.close{
+  position:absolute;
+  top:18px;
+  right:25px;
+  font-size:4rem;
+  color:#999;
+  cursor:pointer;
+  transition:.3s;
+  user-select:none;
+}
+
+.close:hover{
+  color:var(--accent);
+  transform:rotate(90deg);
+}
+
+/* ---------------- GRID CARDS ---------------- */
+.grid{
+  display:grid;
+  gap:35px;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+}
+
+.hotel-card{
+  background:#1b1b1b;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.55);
+  transition:.4s;
+}
+
+.hotel-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 35px 90px rgba(0,229,229,.35);
+}
+
+.hotel-card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  transition:.6s;
+}
+
+.hotel-card:hover img{
+  transform:scale(1.07);
+}
+
+.info h3{
+  font-size:1.55rem;
+  color:var(--accent);
+  padding:22px 22px 6px;
+}
+
+.info p{
+  padding:0 22px 14px;
+  line-height:1.5;
+}
+
+.price{
+  padding:0 22px 17px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#000;
+  padding:15px 32px;
+  border-radius:50px;
+  font-weight:700;
+  margin:0 22px 25px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:white;
+  transform:scale(1.07);
+}
+
+/* ---------------- BURGER ---------------- */
+.burger{
+  position:fixed;
+  top:25px;
+  right:25px;
+  width:36px;
+  cursor:pointer;
+  display:none;
+  z-index:2000;
+}
+
+.burger span{
+  display:block;
+  width:36px;
+  height:4px;
+  margin:7px 0;
+  background:white;
+  border-radius:3px;
+  transition:.35s;
+}
+
+.burger.active span:nth-child(1){
+  transform:translateY(11px) rotate(45deg);
+}
+
+.burger.active span:nth-child(2){
+  opacity:0;
+}
+
+.burger.active span:nth-child(3){
+  transform:translateY(-11px) rotate(-45deg);
+}
+
+/* ---------------- MOBILE MENU ---------------- */
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  background:#000000f2;
+  backdrop-filter:blur(18px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:55px;
+  font-size:2.4rem;
+  font-weight:700;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:1500;
+}
+
+.mobile-menu.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.mobile-menu a{
+  color:white;
+  text-decoration:none;
+}
+
+.mobile-menu a:hover{
+  color:var(--accent);
+}
+
+/* ---------------- FOOTER ---------------- */
+footer{
+  margin-top:80px;
+  padding:70px 20px 60px;
+  text-align:center;
+  font-size:1.1rem;
+  color:#ddd;
+}
+
+footer a{
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* Hide desktop menu on mobile */
+@media(max-width:768px){
+  nav.main-menu{display:none;}
+  .burger{display:block;}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="hero">
-    <div class="burger" id="burger"><span></span><span></span><span></span></div>
-    <h1>Иссык-Куль<br>Южный берег</h1>
-    <nav class="main-menu">
-      <a data-file="hotels.html">ОТЕЛИ</a>
-      <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-      <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-      <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
-    </nav>
+  <h1>Иссык-Куль<br>Южный берег</h1>
+
+  <div class="burger" id="burger">
+    <span></span><span></span><span></span>
   </div>
+
+  <nav class="main-menu">
+    <a data-file="hotels.html">ОТЕЛИ</a>
+    <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+    <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+    <a data-file="locations.html">КРАСИВЫЕ МЕСТА</a>
+  </nav>
 </header>
 
 <nav class="mobile-menu" id="mobileMenu">
   <a data-file="hotels.html">ОТЕЛИ</a>
   <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
   <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-  <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
+  <a data-file="locations.html">КРАСИВЫЕ МЕСТА</a>
 </nav>
 
 <div class="modal" id="mainModal">
   <div class="modal-content">
-    <span class="close">×</span>
+    <span class="close">&times;</span>
     <div id="modalBody"></div>
   </div>
 </div>
 
 <footer>
-  <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 709 10 00 20 </a></p>
+  Иссык-Куль • Южный берег © 2025<br><br>
+  WhatsApp: <a href="https://wa.me/996709100020">+996 709 10 00 20</a>
 </footer>
 
 <script>
-document.querySelectorAll('[data-file]').forEach(a => {
-  a.onclick = async () => {
-    const file = a.getAttribute('data-file');
-    const modal = document.getElementById('mainModal');
-    const body = document.getElementById('modalBody');
-    try {
-      const r = await fetch(file + '?v=' + Date.now());
-      const html = await r.text();
-      body.innerHTML = html;
-    } catch {
-      body.innerHTML = '<p style="color:#f66;text-align:center;padding:100px">Файл не найден</p>';
+document.querySelectorAll("[data-file]").forEach(link=>{
+  link.onclick=async()=>{
+    const file=link.getAttribute("data-file");
+    const modal=document.getElementById("mainModal");
+    const body=document.getElementById("modalBody");
+
+    try{
+      const r=await fetch(file+"?v="+Date.now());
+      body.innerHTML=await r.text();
+    }catch{
+      body.innerHTML="<p style='color:#f66;text-align:center;padding:80px'>Файл не найден</p>";
     }
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+
+    modal.classList.add("active");
+    document.body.style.overflow="hidden";
   };
 });
 
-document.querySelector('.modal').onclick = e => {
-  if (e.target === document.querySelector('.modal') || e.target.classList.contains('close')) {
-    document.querySelector('.modal').classList.remove('active');
-    document.body.style.overflow = '';
+document.querySelector(".modal").onclick=e=>{
+  if(e.target.classList.contains("modal") || e.target.classList.contains("close")){
+    document.getElementById("mainModal").classList.remove("active");
+    document.body.style.overflow="";
   }
 };
 
-document.getElementById('burger').onclick = () => {
-  document.getElementById('burger').classList.toggle('active');
-  document.getElementById('mobileMenu').classList.toggle('active');
-  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+document.getElementById("burger").onclick=()=>{
+  const b=document.getElementById("burger");
+  const m=document.getElementById("mobileMenu");
+  b.classList.toggle("active");
+  m.classList.toggle("active");
+  document.body.style.overflow=m.classList.contains("active")?"hidden":"";
 };
 </script>
+
 </body>
 </html>
