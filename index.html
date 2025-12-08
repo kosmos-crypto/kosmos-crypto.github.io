@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
 <meta name="description" content="Отдых на южном берегу Иссык-Куля 2025: отели, юрты, гостевые дома и красивые места">
+<link rel="stylesheet" href="index.html?v=20251208">
 <style>
 :root{--accent:#00e5e5;--text:#f2f7f8;--bg:#0b0c0d;}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -25,7 +26,7 @@ h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bot
   font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;
 }
 .main-menu a{
-  color:white;text-decoration:none;padding:10px 0;position:relative;cursor:pointer;
+  color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer;
 }
 .main-menu a::after{
   content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--accent);
@@ -34,7 +35,7 @@ h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bot
 .main-menu a:hover{color:var(--accent)}
 .main-menu a:hover::after{width:90%}
 
-/* Модальные окна */
+/* модальные окна */
 .modal{
   position:fixed;inset:0;background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);
   display:flex;align-items:center;justify-content:center;padding:20px;
@@ -47,7 +48,7 @@ h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bot
   padding:50px 30px;position:relative;
 }
 .close{
-  position:absolute;top:15px;right:25px;font-size:3.5rem;cursor:pointer;color:#666;
+  position:absolute;top:15px;right:25px;font-size:3.5rem;cursor:pointer;color:#888;
   width:60px;height:60px;display:flex;align-items:center;justify-content:center;
   border-radius:50%;transition:.4s;line-height:1;
 }
@@ -63,7 +64,7 @@ h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bot
   box-shadow:0 15px 40px rgba(0,0,0,0.7);transition:.4s;
 }
 .card:hover{transform:translateY(-12px);box-shadow:0 30px 70px rgba(0,212,212,0.25)}
-.card img{width:100%;height:240px;object-fit:cover;transition:.6s}
+.card img{width:100%;height:250px;object-fit:cover;transition:.6s}
 .card:hover img{transform:scale(1.08)}
 .card h3{padding:20px 20px 8px;font-size:1.5rem;color:var(--accent)}
 .card p{padding:0 20px 15px;opacity:0.9;line-height:1.5}
@@ -74,7 +75,7 @@ h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bot
 }
 .btn:hover{background:#fff;transform:scale(1.05)}
 
-/* Бургер */
+/* бургер */
 .burger{display:none;position:absolute;top:30px;right:20px;z-index:1001;cursor:pointer}
 .burger span{width:32px;height:3px;background:white;margin:6px 0;border-radius:3px;transition:.3s;display:block}
 .burger.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
@@ -121,36 +122,13 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
   <a data-modal="places">КРАСИВЫЕ МЕСТА</a>
 </nav>
 
-<!-- ========== МОДАЛЬНЫЕ ОКНА ========== -->
-
+<!-- МОДАЛЬНЫЕ ОКНА — сюда добавляй сколько угодно карточек -->
 <div class="modal" id="hotels">
   <div class="modal-content">
     <span class="close">×</span>
-    <h2>Лучшие отели южного берега</h2>
+    <h2>Лучшие отели 2025</h2>
     <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1582719478250-c89cd483e89e?w=1200&auto=format&fit=crop&q=80" alt="Radisson Blu">
-        <h3>Radisson Blu Resort</h3>
-        <p>5★ · Первая линия · СПА · Всё включено</p>
-        <div class="price">от 18 000 сом / ночь</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&auto=format&fit=crop&q=80" alt="Каприз">
-        <h3>Каприз Issyk-Kul</h3>
-        <p>4★ · Собственный пляж · Ресторан · Баня</p>
-        <div class="price">от 11 000 сом</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80" alt="Royal Beach">
-        <h3>Royal Beach</h3>
-        <p>Современный отель · Бассейн · Вид на горы</p>
-        <div class="price">от 9 500 сом</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-    </div>
-  <!-- добавляй ещё сколько угодно -->
+      <!-- твои отели здесь -->
     </div>
   </div>
 </div>
@@ -160,14 +138,7 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
     <span class="close">×</span>
     <h2>Гостевые дома и коттеджи</h2>
     <div class="grid">
-      <!-- пример карточек — дополни своими -->
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=1200&auto=format&fit=crop&q=80" alt="">
-        <h3>Уют у озера</h3>
-        <p>Семейный отдых · Домашняя кухня · 5 минут пешком до пляжа</p>
-        <div class="price">от 4 000 сом / ночь</div>
-        <a href="https://wa.me/996999123456" class="btn">Написать в WhatsApp</a>
-      </div>
+      <!-- твои гостевые дома -->
     </div>
   </div>
 </div>
@@ -175,15 +146,9 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 <div class="modal" id="yurts">
   <div class="modal-content">
     <span class="close">×</span>
-    <h2>Юрточные лагеря и этно-туры</h2>
+    <h2>Юрточные лагеря</h2>
     <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1200&auto=format&fit=crop&q=80" alt="Юрта">
-        <h3>Тянь-Шань Юрт Кэмп</h3>
-        <p>Настоящие юрты · Костёр · Конные прогулки · Охота с беркутом</p>
-        <div class="price">от 5 500 сом с трёхразовым питанием</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
+      <!-- юрты -->
     </div>
   </div>
 </div>
@@ -193,40 +158,29 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
     <span class="close">×</span>
     <h2>Красивые места рядом</h2>
     <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1627741797892-9f43e3831337?w=1200&auto=format&fit=crop&q=80" alt="Джеты-Огуз">
-        <h3>Джеты-Огуз</h3>
-        <p>Красные скалы «Семь быков» и «Разбитое сердце» — 30 мин на машине</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop&q=80" alt="Каньон Сказка">
-        <h3>Каньон Сказка</h3>
-        <p>Марсианские пейзажи в 20–25 минутах от южного берега</p>
-      </div>
+      <!-- места -->
     </div>
   </div>
 </div>
 
 <footer>
   <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456" target="_blank">+996 709 10 00 20</a></p>
+  <p>WhatsApp: <a href="https://wa.me/996999123456" target="_blank">+996 999 123 456</a></p>
 </footer>
 
 <script>
-// Открытие модалки
-document.querySelectorAll('[data-modal]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const id = link.getAttribute('data-modal');
+// Открытие
+document.querySelectorAll('[data-modal]').forEach(el => {
+  el.addEventListener('click', () => {
+    const id = el.getAttribute('data-modal');
     document.getElementById(id).classList.add('active');
     document.body.style.overflow = 'hidden';
-    // закрываем мобильное меню, если оно открыто
-    burger.classList.remove('active');
-    mobileMenu.classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('active');
+    document.getElementById('burger').classList.remove('active');
   });
 });
 
-// Закрытие модалки
+// Закрытие
 document.querySelectorAll('.modal').forEach(modal => {
   modal.addEventListener('click', e => {
     if (e.target === modal || e.target.classList.contains('close')) {
@@ -236,14 +190,11 @@ document.querySelectorAll('.modal').forEach(modal => {
   });
 });
 
-// Бургер-меню
-const burger = document.getElementById('burger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-burger.addEventListener('click', () => {
-  burger.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+// Бургер
+document.getElementById('burger').addEventListener('click', () => {
+  document.getElementById('burger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
 });
 </script>
 </body>
