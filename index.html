@@ -5,154 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
 <style>
-:root{
-  --sun:#FFD60A;
-  --sky:#00D4FF;
-  --ocean:#00FFFF;
-  --sand:#FFF8E1;
-  --wave:#00BFFF;
-}
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Inter,"Segoe UI",sans-serif;
- background:linear-gradient(135deg,#001122,#003366);
- color:#fff;
- overflow-x:hidden;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+  height:100vh;
 }
-header{
-  height:100vh;min-height:680px;
-  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.7)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') center/cover;
-  display:flex;align-items:center;justify-content:center;text-align:center;position:relative;
-}
-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,212,255,0.3),rgba(255,214,10,0.2))}
-h1{
-  font-size:clamp(4rem,13vw,8.5rem);
-  font-weight:900;
-  background:linear-gradient(90deg,#FFD60A,#00FFFF,#00D4FF);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:0 0 40px rgba(0,212,255,0.6);
-  letter-spacing:8px;
-}
-nav.main-menu{
-  display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(30px,7vw,100px);
-  margin-top:60px;font-weight:800;font-size:clamp(1.6rem,4.5vw,2.5rem);
-}
-nav.main-menu a{
-  color:white;padding:16px 0;position:relative;transition:.4s;
-  text-shadow:0 0 20px #00ffff;
-}
-nav.main-menu a::after{
-  content:"";position:absolute;left:50%;bottom:8px;width:0;height:6px;
-  background:linear-gradient(90deg,var(--sun),var(--ocean));
-  border-radius:10px;transform:translateX(-50%);transition:.5s;
-  box-shadow:0 0 30px var(--ocean);
-}
-nav.main-menu a:hover{
-  color:var(--ocean);text-shadow:0 0 40px var(--ocean);
-}
-nav.main-menu a:hover::after{width:100%}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.93);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.6s;z-index:1000;overflow-y:auto}
+/* Главная — только фото Иссык-Куля */
+header{
+  position:fixed;
+  inset:0;
+  background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;
+}
+
+/* Плавающие кнопки внизу */
+.menu{
+  position:fixed;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  z-index:100;
+}
+.menu a{
+  background:rgba(0,0,0,0.6);
+  color:white;
+  padding:16px 32px;
+  border-radius:50px;
+  font-weight:800;
+  font-size:1.3rem;
+  text-decoration:none;
+  backdrop-filter:blur(10px);
+  border:2px solid rgba(0,255,255,0.4);
+  transition:.4s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.menu a:hover{
+  background:#00ffff;
+  color:#000;
+  transform:scale(1.1);
+  box-shadow:0 15px 40px rgba(0,255,255,0.5);
+}
+
+/* Яркие модалки */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.94);
+  backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  opacity:0;
+  pointer-events:none;
+  transition:.6s;
+  z-index:1000;
+  overflow-y:auto;
+}
 .modal.active{opacity:1;pointer-events:auto}
 .modal-content{
-  background:#ffffff;background:linear-gradient(145deg,#f0f8ff,#e6f7ff);
-  max-width:1400px;width:100%;max-height:95vh;overflow-y:auto;
-  border-radius:36px;padding:90px 50px 70px;position:relative;
-  box-shadow:0 30px 120px rgba(0,212,255,0.4);
-  border:3px solid #00ffff33;
+  background:#fff;
+  color:#000;
+  max-width:1400px;
+  width:100%;
+  max-height:95vh;
+  overflow-y:auto;
+  border-radius:36px;
+  padding:90px 50px 70px;
+  position:relative;
+  box-shadow:0 30px 120px rgba(0,212,255,0.5);
 }
 .close{
-  position:absolute;top:20px;right:35px;font-size:5rem;color:#00aaff;
-  width:80px;height:80px;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;transition:.4s;background:rgba(0,212,255,0.1);
+  position:absolute;
+  top:20px;right:35px;
+  font-size:5rem;
+  color:#00aaff;
+  width:80px;height:80px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:rgba(0,212,255,0.1);
+  cursor:pointer;
+  transition:.4s;
 }
-.close:hover{color:#fff;background:#00ffff;transform:rotate(90deg)}
+.close:hover{
+  color:#fff;
+  background:#00ffff;
+  transform:rotate(90deg);
+}
 
-.grid{display:grid;gap:50px;grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.grid{
+  display:grid;
+  gap:50px;
+  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+}
 .hotel-card{
-  background:#fff;border-radius:32px;overflow:hidden;
+  background:#fff;
+  border-radius:32px;
+  overflow:hidden;
   box-shadow:0 20px 60px rgba(0,212,255,0.25);
-  transition:.5s;border:2px solid #00ffff22;
+  transition:.5s;
 }
 .hotel-card:hover{
   transform:translateY(-20px);
   box-shadow:0 40px 100px rgba(0,212,255,0.45);
-  border-color:#00ffff;
 }
-.hotel-card img{width:100%;height:300px;object-fit:cover;transition:.8s}
+.hotel-card img{
+  width:100%;height:300px;object-fit:cover;transition:.8s;
+}
 .hotel-card:hover img{transform:scale(1.15)}
 .info h3{
-  font-size:2rem;color:#0066ff;padding:35px 35px 12px;
-  font-weight:900;background:linear-gradient(90deg,#00d4ff,#00ffff);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-size:2rem;color:#0066cc;padding:35px 35px 12px;font-weight:900;
 }
 .info p{
   padding:0 35px 20px;font-size:1.2rem;color:#333;line-height:1.7;
 }
 .price{
-  font-size:1.9rem;font-weight:900;color:#0066ff;padding:0 35px 30px;
+  font-size:1.9rem;font-weight:900;color:#0066cc;padding:0 35px 30px;
 }
 .btn{
-  display:inline-block;background:linear-gradient(45deg,#00d4ff,#00ffff);
-  color:#000;font-weight:900;padding:20px 55px;border-radius:60px;
-  margin:0 35px 40px;font-size:1.3rem;transition:.4s;
-  box-shadow:0 10px 30px rgba(0,212,255,0.5);
+  display:inline-block;
+  background:linear-gradient(45deg,#00d4ff,#00ffff);
+  color:#000;
+  font-weight:900;
+  padding:20px 55px;
+  border-radius:60px;
+  margin:0 35px 40px;
+  font-size:1.3rem;
+  transition:.4s;
+  box-shadow:0 10px 40px rgba(0,212,255,0.5);
 }
 .btn:hover{
-  background:#00ffff;transform:scale(1.12);
-  box-shadow:0 20px 50px rgba(0,255,255,0.7);
+  background:#00ffff;
+  transform:scale(1.12);
+  box-shadow:0 20px 60px rgba(0,255,255,0.8);
 }
-
-.burger{display:none;position:fixed;top:35px;right:30px;z-index:10001;cursor:pointer}
-.burger span{display:block;width:40px;height:5px;background:#00ffff;margin:8px 0;border-radius:5px;transition:.4s;box-shadow:0 0 20px #00ffff}
-.burger.active span:nth-child(1){transform:translateY(13px) rotate(45deg)}
-.burger.active span:nth-child(2){opacity:0}
-.burger.active span:nth-child(3){transform:translateY(-13px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;background:linear-gradient(135deg,#001122,#003366);backdrop-filter:blur(16px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:70px;font-size:3rem;font-weight:800;opacity:0;pointer-events:none;transition:.5s;z-index:10000}
-.mobile-menu.active{opacity:1;pointer-events:auto}
-.mobile-menu a{color:white;transition:.4s}
-.mobile-menu a:hover{color:#00ffff;text-shadow:0 0 40px #00ffff;transform:scale(1.1)}
-
-footer{padding:120px 20px 80px;text-align:center;font-size:1.3rem;background:linear-gradient(to top,#000428,#001122)}
-footer a{color:#00ffff;font-weight:800;text-shadow:0 0 20px #00ffff;transition:.3s}
-footer a:hover{transform:scale(1.1)}
-@media(max-width:768px){.main-menu{display:none}.burger{display:block}}
 </style>
 </head>
 <body>
-<header>
-  <div class="hero">
-    <div class="burger" id="burger"><span></span><span></span><span></span></div>
-    <h1>Иссык-Куль<br>Южный берег</h1>
-    <nav class="main-menu">
-      <a data-file="hotels.html">ОТЕЛИ</a>
-      <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-      <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-      <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
-    </nav>
-  </div>
-</header>
 
-<nav class="mobile-menu" id="mobileMenu">
+<!-- Только фото Иссык-Куля -->
+<header></header>
+
+<!-- Кнопки внизу экрана -->
+<div class="menu">
   <a data-file="hotels.html">ОТЕЛИ</a>
   <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
   <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
   <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
-</nav>
+</div>
 
+<!-- Одна универсальная модалка -->
 <div class="modal" id="mainModal">
   <div class="modal-content">
     <span class="close">×</span>
     <div id="modalBody"></div>
   </div>
 </div>
-
-<footer>
-  <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996709100020">+996 709 10 00 20</a></p>
-</footer>
 
 <script>
 document.querySelectorAll('[data-file]').forEach(a => {
@@ -164,21 +179,19 @@ document.querySelectorAll('[data-file]').forEach(a => {
       const r = await fetch(file + '?v=' + Date.now());
       const html = await r.text();
       body.innerHTML = html;
-    } catch { body.innerHTML = '<p style="color:#f66;text-align:center;padding:150px;font-size:2rem">Файл не найден</p>'; }
+    } catch {
+      body.innerHTML = '<p style="text-align:center;color:#f66;padding:150px;font-size:2rem">Файл не найден</p>';
+    }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   };
 });
+
 document.querySelector('.modal').onclick = e => {
   if (e.target === document.querySelector('.modal') || e.target.classList.contains('close')) {
     document.querySelector('.modal').classList.remove('active');
     document.body.style.overflow = '';
   }
-};
-document.getElementById('burger').onclick = () => {
-  document.getElementById('burger').classList.toggle('active');
-  document.getElementById('mobileMenu').classList.toggle('active');
-  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
 };
 </script>
 </body>
