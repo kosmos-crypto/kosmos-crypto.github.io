@@ -8,55 +8,34 @@
 <style>
 :root{--accent:#00e5e5;--text:#f2f7f8;--bg:#0b0c0d;}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{font-family:Inter,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-
 header{height:100vh;min-height:600px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.85))}
-.hero{position:relative;z-index:2;padding:0 20px}
-h1{font-size:clamp(3.5rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bottom:50px;color:white;text-shadow:0 8px 40px #000}
-
-.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(30px,6vw,100px);font-size:clamp(1.4rem,4vw,2rem);font-weight:700}
-.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer}
-.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;height:4px;background:var(--accent);border-radius:4px;transform:translateX(-50%);transition:.4s}
+header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.8))}
+h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bottom:50px;text-shadow:0 8px 40px #000;color:white}
+.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(25px,5vw,80px);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700}
+.main-menu a{color:white;text-decoration:none;padding:10px 0;position:relative;cursor:pointer}
+.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--accent);border-radius:4px;transform:translateX(-50%);transition:.4s}
 .main-menu a:hover{color:var(--accent)}
 .main-menu a:hover::after{width:90%}
-
 /* модалки */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
 .modal.active{opacity:1;pointer-events:auto}
-.modal-content{background:#111;max-width:1250px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:60px 40px 50px;position:relative;box-shadow:0 30px 100px rgba(0,212,212,.35)}
-.close{position:absolute;top:15px;right:25px;font-size:4rem;cursor:pointer;color:#777;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
-.close:hover{color:var(--accent);background:rgba(255,255,255,.08);transform:rotate(90deg)}
-
-.modal h2{font-size:clamp(2.6rem,7vw,4.2rem);text-align:center;margin-bottom:60px;color:var(--accent);letter-spacing:4px}
-
-.grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-.card{background:#1a1a1a;border-radius:22px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.7);transition:.4s}
-.card:hover{transform:translateY(-15px);box-shadow:0 35px 80px rgba(0,212,212,.3)}
-.card img{width:100%;height:260px;object-fit:cover;transition:.7s}
-.card:hover img{transform:scale(1.09)}
-.card h3{padding:25px 25px 10px;font-size:1.55rem;color:var(--accent)}
-.card p{padding:0 25px 18px;opacity:.92;line-height:1.55}
-.price{font-size:1.4rem;font-weight:700;color:var(--accent);padding:0 25px 18px}
-.btn{display:inline-block;background:var(--accent);color:#000;padding:14px 34px;border-radius:50px;font-weight:700;text-decoration:none;margin:0 25px 30px;transition:.3s}
-.btn:hover{background:#fff;transform:scale(1.06)}
-
-/* бургер и мобильное меню */
-.burger{display:none;position:absolute;top:30px;right:25px;z-index:1001;cursor:pointer}
-.burger span{display:block;width:34px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
-.burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
+.modal-content{background:#111;max-width:1200px;width:100%;max-height:95vh;overflow-y:auto;border-radius:24px;box-shadow:0 30px 100px rgba(0,212,212,.3);padding:50px 30px;position:relative}
+.close{position:absolute;top:15px;right:25px;font-size:3.5rem;cursor:pointer;color:#666;width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
+.close:hover{color:var(--accent);background:rgba(255,255,255,.1);transform:rotate(90deg)}
+.modal h2{font-size:clamp(2.5rem,7vw,4rem);text-align:center;margin-bottom:50px;color:var(--accent)}
+.modal-content div{font-size:1.1rem;line-height:1.6}
+.burger{display:none;position:absolute;top:30px;right:20px;z-index:1001;cursor:pointer}
+.burger span{width:32px;height:3px;background:white;margin:6px 0;border-radius:3px;transition:.3s;display:block}
+.burger.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
 .burger.active span:nth-child(2){opacity:0}
-.burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
-
-.mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.98);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:55px;font-size:2.6rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:999}
+.burger.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.97);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:50px;font-size:2.4rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:999}
 .mobile-menu.active{opacity:1;pointer-events:auto}
-.mobile-menu a{color:white}
+.mobile-menu a{color:white;text-decoration:none}
 .mobile-menu a:hover{color:var(--accent)}
-
-footer{padding:100px 20px 70px;text-align:center}
+footer{padding:100px 20px 60px;text-align:center}
 footer a{color:var(--accent);font-weight:700;text-decoration:none}
-
 @media(max-width:768px){.main-menu{display:none}.burger{display:block}}
 </style>
 </head>
@@ -67,154 +46,75 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <h1>Иссык-Куль<br>Южный берег</h1>
     <nav class="main-menu">
-      <a data-modal="hotels">ОТЕЛИ</a>
-      <a data-modal="guesthouses">ГОСТЕВЫЕ ДОМА</a>
-      <a data-modal="yurts">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-      <a data-modal="places">КРАСИВЫЕ МЕСТА</a>
+      <a data-modal="hotels" data-file="hotels.html">ОТЕЛИ</a>
+      <a data-modal="places" data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+      <a data-modal="activities" data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+      <a data-modal="contacts" data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
     </nav>
   </div>
 </header>
 
 <nav class="mobile-menu" id="mobileMenu">
-  <a data-modal="hotels">ОТЕЛИ</a>
-  <a data-modal="guesthouses">ГОСТЕВЫЕ ДОМА</a>
-  <a data-modal="yurts">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-  <a data-modal="places">КРАСИВЫЕ МЕСТА</a>
+  <a data-modal="hotels" data-file="hotels.html">ОТЕЛИ</a>
+  <a data-modal="places" data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+  <a data-modal="activities" data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+  <a data-modal="contacts" data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
 </nav>
 
-<!-- ОТЕЛИ -->
-<div class="modal" id="hotels">
-  <div class="modal-content">
-    <span class="close">×</span>
-    <h2>Лучшие отели 2025</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1582719478250-c89cd483e89e?w=1200&auto=format&fit=crop&q=80" alt="Radisson">
-        <h3>Radisson Blu Resort</h3>
-        <p>5★ · Первая линия · СПА-центр · Бассейн с подогревом · Всё включено</p>
-        <div class="price">от 18 000 сом / ночь</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&auto=format&fit=crop&q=80" alt="Каприз">
-        <h3>Каприз Issyk-Kul</h3>
-        <p>4★ · Собственный пляж · Ресторан · Сауна и баня</p>
-        <div class="price">от 11 500 сом</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80" alt="Royal Beach">
-        <h3>Royal Beach</h3>
-        <p>Новый отель 2024 · Бассейн · Вид на горы · 10 мин до озера</p>
-        <div class="price">от 9 800 сом</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ГОСТЕВЫЕ ДОМА -->
-<div class="modal" id="guesthouses">
-  <div class="modal-content">
-    <span class="close">×</span>
-    <h2>Гостевые дома и коттеджи</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=1200&auto=format&fit=crop&q=80" alt="">
-        <h3>Уют у Озера</h3>
-        <p>Семейный дом · Домашняя кухня · Мангал · 5 мин пешком до пляжа</p>
-        <div class="price">от 4 200 сом / ночь</div>
-        <a href="https://wa.me/996999123456" class="btn">Написать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab1d8d49e9f8?w=1200&auto=format&fit=crop&q=80" alt="">
-        <h3>Горный Панорама</h3>
-        <p>Коттедж на 8–10 человек · Баня · Вид на горы</p>
-        <div class="price">от 12 000 сом / сутки</div>
-        <a href="https://wa.me/996999123456" class="btn">Написать</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ЮРТОЧНЫЕ ЛАГЕРЯ -->
-<div class="modal" id="yurts">
-  <div class="modal-content">
-    <span class="close">×</span>
-    <h2>Юрточные лагеря и этно-туры</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1200&auto=format&fit=crop&q=80" alt="">
-        <h3>Тянь-Шань Юрт Кэмп</h3>
-        <p>Настоящие юрты · Костёр каждый вечер · Конные прогулки · Охота с беркутом</p>
-        <div class="price">от 5 500 сом (3-разовое питание)</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop&q=80" alt="">
-        <h3>Алтын-Көл Юрта</h3>
-        <p>У самого озера · Рыбалка · Катамараны · Национальная кухня</p>
-        <div class="price">от 4 800 сом</div>
-        <a href="https://wa.me/996999123456" class="btn">Забронировать</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- КРАСИВЫЕ МЕСТА -->
-<div class="modal" id="places">
-  <div class="modal-content">
-    <span class="close">×</span>
-    <h2>Красивые места рядом</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1627741797892-9f43e3831337?w=1200&auto=format&fit=crop&q=80" alt="Джеты-Огуз">
-        <h3>Джеты-Огуз</h3>
-        <p>Красные скалы «Семь быков» и «Разбитое сердце» — 30 минут на машине</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599641952234-0ec15f5c7455?w=1200&auto=format&fit=crop&q=80" alt="Каньон Сказка">
-        <h3>Каньон Сказка</h3>
-        <p>Марсианские пейзажи прямо как на другой планете — 20 минут</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1519981447864-2e5e0a4d3e3e?w=1200&auto=format&fit=crop&q=80" alt="Барскоон">
-        <h3>Водопад Барскоон</h3>
-        <p>Один из самых мощных водопадов Кыргызстана</p>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- МОДАЛЬНЫЕ ОКНА -->
+<div class="modal" id="hotels"><div class="modal-content"><span class="close">×</span><h2>Отели</h2><div id="hotels-content"></div></div></div>
+<div class="modal" id="places"><div class="modal-content"><span class="close">×</span><h2>Гостевые дома</h2><div id="places-content"></div></div></div>
+<div class="modal" id="activities"><div class="modal-content"><span class="close">×</span><h2>Юрточные лагеря</h2><div id="activities-content"></div></div></div>
+<div class="modal" id="contacts"><div class="modal-content"><span class="close">×</span><h2>Красивые места</h2><div id="contacts-content"></div></div></div>
 
 <footer>
   <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456" target="_blank">+996 999 123 456</a></p>
+  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 999 123 456</a></p>
 </footer>
 
 <script>
-document.querySelectorAll('[data-modal]').forEach(el => {
-  el.onclick = () => {
-    document.getElementById(el.getAttribute('data-modal')).classList.add('active');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('mobileMenu').classList.remove('active');
-    document.getElementById('burger').classList.remove('active');
-  };
-});
-
-document.querySelectorAll('.modal').forEach(m => {
-  m.onclick = e => {
-    if (e.target === m || e.target.classList.contains('close')) {
-      m.classList.remove('active');
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal || e.target.classList.contains('close')) {
+      modal.classList.remove('active');
       document.body.style.overflow = '';
     }
-  };
+  });
 });
 
-document.getElementById('burger').onclick = () => {
-  document.getElementById('burger').classList.toggle('active');
-  document.getElementById('mobileMenu').classList.toggle('active');
-  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
-};
+document.querySelectorAll('[data-modal]').forEach(link => {
+  link.addEventListener('click', async () => {
+    const modalId = link.getAttribute('data-modal');
+    const file = link.getAttribute('data-file');
+    const modal = document.getElementById(modalId);
+    const contentDiv = document.getElementById(`${modalId}-content`);
+    
+    // Загрузка контента из файла
+    try {
+      const response = await fetch(file);
+      const html = await response.text();
+      contentDiv.innerHTML = html;  // Вставляем HTML из файла
+    } catch (error) {
+      contentDiv.innerHTML = '<p>Ошибка загрузки контента. Проверьте файл.</p>';
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Закрываем бургер если открыт
+    document.getElementById('burger').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('active');
+  });
+});
+
+// Бургер
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+});
 </script>
 </body>
 </html>
