@@ -4,38 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
-<meta name="description" content="Отдых на южном берегу Иссык-Куля 2025">
 <style>
-:root{--accent:#00e5e5;--text:#f2f7f8;--bg:#0b0c0d;}
+:root{--a:#00e5e5;--b:#0b0c0d}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-header{height:100vh;min-height:600px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.8))}
-h1{font-size:clamp(3rem,10vw,7rem);font-weight:900;letter-spacing:8px;margin-bottom:50px;text-shadow:0 8px 40px #000;color:white}
-.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(25px,5vw,80px);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700}
-.main-menu a{color:white;text-decoration:none;padding:10px 0;position:relative;cursor:pointer}
-.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--accent);border-radius:4px;transform:translateX(-50%);transition:.4s}
-.main-menu a:hover{color:var(--accent)}
-.main-menu a:hover::after{width:90%}
-/* модалки */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
+body{font-family:Inter,"Segoe UI",sans-serif;background:var(--b);color:#f2f7f8;overflow-x:hidden}
+header{height:100vh;min-height:620px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.85))}
+h1{font-size:clamp(3.6rem,11vw,7.5rem);font-weight:900;color:white;text-shadow:0 10px 40px #000;letter-spacing:9px;line-height:1.1}
+nav.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(35px,7vw,110px);margin-top:60px;font-weight:700;font-size:clamp(1.5rem,4vw,2.2rem)}
+nav.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer}
+nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--a);border-radius:4px;transform:translateX(-50%);transition:.4s}
+nav.main-menu a:hover{color:var(--a)}
+nav.main-menu a:hover::after{width:90%}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
 .modal.active{opacity:1;pointer-events:auto}
-.modal-content{background:#111;max-width:1200px;width:100%;max-height:95vh;overflow-y:auto;border-radius:24px;box-shadow:0 30px 100px rgba(0,212,212,.3);padding:50px 30px;position:relative}
-.close{position:absolute;top:15px;right:25px;font-size:3.5rem;cursor:pointer;color:#666;width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
-.close:hover{color:var(--accent);background:rgba(255,255,255,.1);transform:rotate(90deg)}
-.modal h2{font-size:clamp(2.5rem,7vw,4rem);text-align:center;margin-bottom:50px;color:var(--accent)}
-.modal-content div{font-size:1.1rem;line-height:1.6}
-.burger{display:none;position:absolute;top:30px;right:20px;z-index:1001;cursor:pointer}
-.burger span{width:32px;height:3px;background:white;margin:6px 0;border-radius:3px;transition:.3s;display:block}
-.burger.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.modal-content{background:#111;max-width:1350px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:80px 40px 60px;position:relative;box-shadow:0 40px 120px rgba(0,229,229,.45)}
+.close{position:absolute;top:15px;right:30px;font-size:4.5rem;color:#888;cursor:pointer;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
+.close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
+
+.grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.hotel-card,.card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
+.hotel-card:hover,.card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
+.hotel-card img,.card img{width:100%;height:270px;object-fit:cover;transition:.7s}
+.hotel-card:hover img,.card:hover img{transform:scale(1.1)}
+.info,.card h3,.card p{padding:20px 25px}
+.info h3,.card h3{font-size:1.6rem;color:var(--a);margin-bottom:8px}
+.price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
+.btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
+.btn:hover{background:#fff;transform:scale(1.07)}
+
+.burger{display:none;position:fixed;top:30px;right:25px;z-index:10001;cursor:pointer}
+.burger span{display:block;width:35px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
+.burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
 .burger.active span:nth-child(2){opacity:0}
-.burger.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.97);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:50px;font-size:2.4rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:999}
+.burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:#000000fa;backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;font-size:2.7rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:10000}
 .mobile-menu.active{opacity:1;pointer-events:auto}
 .mobile-menu a{color:white;text-decoration:none}
-.mobile-menu a:hover{color:var(--accent)}
-footer{padding:100px 20px 60px;text-align:center}
-footer a{color:var(--accent);font-weight:700;text-decoration:none}
+.mobile-menu a:hover{color:var(--a)}
+
+footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
+footer a{color:var(--a);font-weight:700;text-decoration:none}
 @media(max-width:768px){.main-menu{display:none}.burger{display:block}}
 </style>
 </head>
@@ -46,26 +56,27 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
     <h1>Иссык-Куль<br>Южный берег</h1>
     <nav class="main-menu">
-      <a data-modal="hotels" data-file="hotels.html">ОТЕЛИ</a>
-      <a data-modal="places" data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-      <a data-modal="activities" data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-      <a data-modal="contacts" data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
+      <a data-file="hotels.html">ОТЕЛИ</a>
+      <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+      <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+      <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
     </nav>
   </div>
 </header>
 
 <nav class="mobile-menu" id="mobileMenu">
-  <a data-modal="hotels" data-file="hotels.html">ОТЕЛИ</a>
-  <a data-modal="places" data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-  <a data-modal="activities" data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-  <a data-modal="contacts" data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
+  <a data-file="hotels.html">ОТЕЛИ</a>
+  <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
+  <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
+  <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
 </nav>
 
-<!-- МОДАЛЬНЫЕ ОКНА -->
-<div class="modal" id="hotels"><div class="modal-content"><span class="close">×</span><h2>Отели</h2><div id="hotels-content"></div></div></div>
-<div class="modal" id="places"><div class="modal-content"><span class="close">×</span><h2>Гостевые дома</h2><div id="places-content"></div></div></div>
-<div class="modal" id="activities"><div class="modal-content"><span class="close">×</span><h2>Юрточные лагеря</h2><div id="activities-content"></div></div></div>
-<div class="modal" id="contacts"><div class="modal-content"><span class="close">×</span><h2>Красивые места</h2><div id="contacts-content"></div></div></div>
+<div class="modal" id="mainModal">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
 
 <footer>
   <p>Иссык-Куль • Южный берег © 2025</p>
@@ -73,48 +84,35 @@ footer a{color:var(--accent);font-weight:700;text-decoration:none}
 </footer>
 
 <script>
-const modals = document.querySelectorAll('.modal');
-modals.forEach(modal => {
-  modal.addEventListener('click', e => {
-    if (e.target === modal || e.target.classList.contains('close')) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-});
-
-document.querySelectorAll('[data-modal]').forEach(link => {
-  link.addEventListener('click', async () => {
-    const modalId = link.getAttribute('data-modal');
-    const file = link.getAttribute('data-file');
-    const modal = document.getElementById(modalId);
-    const contentDiv = document.getElementById(`${modalId}-content`);
-    
-    // Загрузка контента из файла
+document.querySelectorAll('[data-file]').forEach(a => {
+  a.onclick = async () => {
+    const file = a.getAttribute('data-file');
+    const modal = document.getElementById('mainModal');
+    const body = document.getElementById('modalBody');
     try {
-      const response = await fetch(file);
-      const html = await response.text();
-      contentDiv.innerHTML = html;  // Вставляем HTML из файла
-    } catch (error) {
-      contentDiv.innerHTML = '<p>Ошибка загрузки контента. Проверьте файл.</p>';
+      const r = await fetch(file + '?v=' + Date.now());
+      const html = await r.text();
+      body.innerHTML = html;
+    } catch (e) {
+      body.innerHTML = '<p style="text-align:center;color:#f66;padding:100px">Ошибка загрузки файла</p>';
     }
-    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Закрываем бургер если открыт
-    document.getElementById('burger').classList.remove('active');
-    document.getElementById('mobileMenu').classList.remove('active');
-  });
+  };
 });
 
-// Бургер
-const burger = document.getElementById('burger');
-const mobileMenu = document.getElementById('mobileMenu');
-burger.addEventListener('click', () => {
-  burger.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-});
+document.querySelector('.modal').onclick = e => {
+  if (e.target === document.querySelector('.modal') || e.target.classList.contains('close')) {
+    document.querySelector('.modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+document.getElementById('burger').onclick = () => {
+  document.getElementById('burger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+};
 </script>
 </body>
 </html>
