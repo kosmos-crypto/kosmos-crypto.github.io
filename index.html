@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Иссык-Куль • Южный берег</title>
 <style>
-:root{--a:#00e5e5;--b:#0b0c0d}
+:root{--a:#00e5e5;--b:#0b0d}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Inter,"Segoe UI",sans-serif;background:var(--b);color:#f2f7f8;overflow-x:hidden}
 header{height:100vh;min-height:620px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
@@ -24,12 +24,12 @@ nav.main-menu a:hover::after{width:90%}
 .close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
 
 .grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-.hotel-card,.card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
-.hotel-card:hover,.card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
-.hotel-card img,.card img{width:100%;height:270px;object-fit:cover;transition:.7s}
-.hotel-card:hover img,.card:hover img{transform:scale(1.1)}
-.info,.card h3,.card p{padding:20px 25px}
-.info h3,.card h3{font-size:1.6rem;color:var(--a);margin-bottom:8px}
+.hotel-card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
+.hotel-card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
+.hotel-card img{width:100%;height:270px;object-fit:cover;transition:.7s}
+.hotel-card:hover img{transform:scale(1.1)}
+.info h3{font-size:1.6rem;color:var(--a);padding:25px 25px 8px}
+.info p{padding:0 25px 15px;line-height:1.55}
 .price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
 .btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
 .btn:hover{background:#fff;transform:scale(1.07)}
@@ -41,7 +41,7 @@ nav.main-menu a:hover::after{width:90%}
 .burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
 .mobile-menu{position:fixed;inset:0;background:#000000fa;backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;font-size:2.7rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:10000}
 .mobile-menu.active{opacity:1;pointer-events:auto}
-.mobile-menu a{color:white;text-decoration:none}
+.mobile-menu a{color:white}
 .mobile-menu a:hover{color:var(--a)}
 
 footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
@@ -93,8 +93,8 @@ document.querySelectorAll('[data-file]').forEach(a => {
       const r = await fetch(file + '?v=' + Date.now());
       const html = await r.text();
       body.innerHTML = html;
-    } catch (e) {
-      body.innerHTML = '<p style="text-align:center;color:#f66;padding:100px">Ошибка загрузки файла</p>';
+    } catch {
+      body.innerHTML = '<p style="color:#f66;text-align:center;padding:100px">Файл не найден</p>';
     }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
