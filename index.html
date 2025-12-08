@@ -1,118 +1,597 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Иссык-Куль • Южный берег</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Иссык-Куль — Южный берег</title>
+
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-:root{--a:#00e5e5;--b:#0b0d}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,"Segoe UI",sans-serif;background:var(--b);color:#f2f7f8;overflow-x:hidden}
-header{height:100vh;min-height:620px;background:url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.85))}
-h1{font-size:clamp(3.6rem,11vw,7.5rem);font-weight:900;color:white;text-shadow:0 10px 40px #000;letter-spacing:9px;line-height:1.1}
-nav.main-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(35px,7vw,110px);margin-top:60px;font-weight:700;font-size:clamp(1.5rem,4vw,2.2rem)}
-nav.main-menu a{color:white;text-decoration:none;padding:12px 0;position:relative;cursor:pointer}
-nav.main-menu a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:var(--a);border-radius:4px;transform:translateX(-50%);transition:.4s}
-nav.main-menu a:hover{color:var(--a)}
-nav.main-menu a:hover::after{width:90%}
+  :root{
+    --bg:#0c0e11;
+    --card:#111317;
+    --glass: rgba(255,255,255,0.08);
+    --glass-strong: rgba(255,255,255,0.12);
+    --accent:#00e5e5;
+    --muted:#bfc8ca;
+    --text:#eef5f6;
+    --radius-lg:28px;
+    --radius-md:18px;
+    --gap:24px;
+  }
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.5s;z-index:1000;overflow-y:auto}
-.modal.active{opacity:1;pointer-events:auto}
-.modal-content{background:#111;max-width:1350px;width:100%;max-height:95vh;overflow-y:auto;border-radius:28px;padding:80px 40px 60px;position:relative;box-shadow:0 40px 120px rgba(0,229,229,.45)}
-.close{position:absolute;top:15px;right:30px;font-size:4.5rem;color:#888;cursor:pointer;width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.4s}
-.close:hover{color:var(--a);background:#ffffff0d;transform:rotate(90deg)}
+  /* Reset & base */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    color:var(--text);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    overflow-x:hidden;
+  }
 
-.grid{display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-.hotel-card{background:#1a1a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px #000000bb;transition:.4s}
-.hotel-card:hover{transform:translateY(-16px);box-shadow:0 40px 90px rgba(0,229,229,.35)}
-.hotel-card img{width:100%;height:270px;object-fit:cover;transition:.7s}
-.hotel-card:hover img{transform:scale(1.1)}
-.info h3{font-size:1.6rem;color:var(--a);padding:25px 25px 8px}
-.info p{padding:0 25px 15px;line-height:1.55}
-.price{font-size:1.4rem;color:var(--a);font-weight:700;padding:0 25px 18px}
-.btn{display:inline-block;background:var(--a);color:#000;padding:15px 36px;border-radius:50px;font-weight:700;margin:0 25px 30px;transition:.3s}
-.btn:hover{background:#fff;transform:scale(1.07)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
-.burger{display:none;position:fixed;top:30px;right:25px;z-index:10001;cursor:pointer}
-.burger span{display:block;width:35px;height:4px;background:white;margin:7px 0;border-radius:4px;transition:.3s}
-.burger.active span:nth-child(1){transform:translateY(11px) rotate(45deg)}
-.burger.active span:nth-child(2){opacity:0}
-.burger.active span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;background:#000000fa;backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;font-size:2.7rem;font-weight:700;opacity:0;pointer-events:none;transition:.4s;z-index:10000}
-.mobile-menu.active{opacity:1;pointer-events:auto}
-.mobile-menu a{color:white}
-.mobile-menu a:hover{color:var(--a)}
+  /* Header / Navigation (fixed, light glass) */
+  header.site-header{
+    position:fixed;
+    inset:0 0 auto 0;
+    z-index:40;
+    display:flex;
+    justify-content:center;
+    pointer-events:none; /* children handle pointer */
+  }
+  .topbar{
+    pointer-events:auto;
+    width:100%;
+    max-width:1300px;
+    margin:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius:18px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    box-shadow: 0 8px 30px rgba(2,8,12,0.55);
+  }
 
-footer{padding:100px 20px 70px;text-align:center;font-size:1.15rem}
-footer a{color:var(--a);font-weight:700;text-decoration:none}
-@media(max-width:768px){.main-menu{display:none}.burger{display:block}}
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex:0 0 auto;
+  }
+  .logo{
+    width:46px;
+    height:46px;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),#00b8d9);
+    display:inline-grid;
+    place-items:center;
+    font-weight:800;
+    color:#032424;
+    font-size:16px;
+    box-shadow:0 6px 18px rgba(0,229,229,0.12), inset 0 -6px 12px rgba(255,255,255,0.05);
+  }
+  .brand h2{
+    font-size:1.05rem;
+    margin:0;
+    line-height:1;
+    letter-spacing:0.4px;
+  }
+  .brand p{margin:0;font-size:0.8rem;color:var(--muted)}
+
+  nav.main-nav{
+    margin-left:18px;
+    display:flex;
+    gap:28px;
+    align-items:center;
+    flex:1 1 auto;
+    justify-content:center;
+    font-weight:700;
+    color:var(--text);
+  }
+  nav.main-nav a{
+    position:relative;
+    padding:8px 6px;
+    color:var(--text);
+    transition:color .25s ease;
+    font-size:0.98rem;
+    letter-spacing:0.6px;
+  }
+  nav.main-nav a::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-8px;
+    width:0;
+    height:3px;
+    background:var(--accent);
+    border-radius:3px;
+    transition:width .28s cubic-bezier(.2,.9,.2,1);
+  }
+  nav.main-nav a:hover{color:var(--accent)}
+  nav.main-nav a:hover::after{width:60%}
+
+  .actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:flex-end;
+    flex:0 0 auto;
+  }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:8px 14px;
+    border-radius:12px;
+    color:var(--text);
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--accent), #00b8d9);
+    color:#021212;
+    padding:10px 16px;
+    border-radius:12px;
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,229,229,0.10);
+  }
+
+  /* hero */
+  .hero{
+    min-height:84vh;
+    height:calc(100vh - 36px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:48px 18px;
+    margin-top:12px; /* give room under fixed header */
+  }
+  .hero__bg{
+    position:absolute;
+    inset:0;
+    background-image: url('https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/issykkul.jpg');
+    background-size:cover;
+    background-position:center;
+    z-index:0;
+  }
+  /* soft overlay for readable text (mix of gradient & darken) */
+  .hero__overlay{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg, rgba(10,12,13,0.28) 10%, rgba(10,12,13,0.6) 60%),
+      radial-gradient(1200px 600px at 50% 20%, rgba(0,0,0,0.08), transparent 35%);
+    z-index:1;
+  }
+
+  .hero__content{
+    position:relative;
+    z-index:5;
+    max-width:1100px;
+    width:100%;
+    padding:48px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    align-items:center;
+    justify-content:center;
+  }
+  .eyebrow{
+    color:var(--muted);
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-size:0.92rem;
+    background:rgba(255,255,255,0.02);
+    padding:8px 14px;
+    border-radius:999px;
+    backdrop-filter: blur(4px);
+  }
+
+  h1.title{
+    font-size:clamp(2rem,7.5vw,5.6rem);
+    margin:0;
+    font-weight:900;
+    letter-spacing:2px;
+    line-height:0.95;
+    color:var(--text);
+    text-shadow: 0 18px 40px rgba(2,8,12,0.6);
+  }
+  p.lead{
+    font-size:clamp(1rem,2.4vw,1.4rem);
+    color:var(--muted);
+    max-width:920px;
+    margin:0;
+  }
+
+  .hero-ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .cta{
+    padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer;
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .cta.primary{background:linear-gradient(90deg,var(--accent),#00b8d9); color:#021212}
+  .cta.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06); color:var(--text)}
+  .cta:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+
+  /* Main section with cards */
+  main{
+    position:relative;
+    z-index:10;
+    max-width:1300px;
+    margin: -40px auto 80px;
+    padding:0 20px 60px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:var(--gap);
+    align-items:start;
+  }
+
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius-md);
+    overflow:hidden;
+    box-shadow: 0 16px 36px rgba(2,8,12,0.6);
+    transition: transform .36s cubic-bezier(.16,.9,.3,1), box-shadow .36s;
+    display:flex;
+    flex-direction:column;
+  }
+  .card:hover{
+    transform: translateY(-14px);
+    box-shadow: 0 32px 70px rgba(2,8,12,0.7);
+  }
+  .card .img-wrap{height:200px;overflow:hidden}
+  .card .img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+  .card:hover .img-wrap img{transform:scale(1.08)}
+  .card .body{padding:18px}
+  .card h3{margin:6px 0 8px;font-size:1.18rem;color:var(--text)}
+  .card p{margin:0;color:var(--muted);font-size:0.95rem}
+  .card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+  .price{font-weight:800;color:var(--accent)}
+  .card .btn{padding:10px 14px;border-radius:12px;border:none;background:rgba(255,255,255,0.03);cursor:pointer;font-weight:700}
+
+  /* Footer */
+  footer.site-footer{
+    margin-top:40px;
+    padding:56px 20px;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.98rem;
+  }
+
+  /* Modal (content fetch into) */
+  .modal{
+    position:fixed;
+    inset:0;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(180deg, rgba(2,6,8,0.45), rgba(2,6,8,0.7));
+    z-index:60;
+    padding:28px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .28s ease;
+  }
+  .modal.open{opacity:1;pointer-events:auto}
+  .modal .panel{
+    width:100%;
+    max-width:1100px;
+    border-radius:var(--radius-lg);
+    background:linear-gradient(180deg, rgba(17,18,20,1), rgba(20,22,25,1));
+    padding:26px;
+    box-shadow: 0 40px 100px rgba(2,8,12,0.7);
+    max-height:88vh;
+    overflow:auto;
+  }
+  .modal .close{
+    position:absolute;
+    right:36px;
+    top:28px;
+    background:rgba(255,255,255,0.02);
+    border-radius:10px;
+    width:46px;height:46px;
+    display:inline-grid;place-items:center;
+    cursor:pointer;font-size:22px;color:var(--muted);
+  }
+  .modal .close:hover{color:var(--accent)}
+
+  /* Mobile */
+  .mobile-toggle{
+    display:none;
+    background:transparent;border:none;
+    width:46px;height:46px;border-radius:10px;
+    align-items:center;justify-content:center;
+  }
+
+  @media (max-width:1100px){
+    .grid{grid-template-columns: repeat(2, 1fr)}
+    nav.main-nav{gap:18px}
+  }
+  @media (max-width:780px){
+    .topbar{margin:12px;padding:10px}
+    nav.main-nav{display:none}
+    .mobile-toggle{display:flex;pointer-events:auto}
+    .actions{gap:8px}
+    .hero{padding:28px 18px}
+    .brand h2{font-size:0.95rem}
+    .hero__content{padding:28px 18px}
+    .grid{grid-template-columns:1fr; gap:18px}
+  }
+
+  /* Accessibility & motion */
+  @media (prefers-reduced-motion: reduce){
+    .card,.cta,nav.main-nav a{transition:none}
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hero">
-    <div class="burger" id="burger"><span></span><span></span><span></span></div>
-    <h1>Иссык-Куль<br>Южный берег</h1>
-    <nav class="main-menu">
-      <a data-file="hotels.html">ОТЕЛИ</a>
-      <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-      <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-      <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
+<!-- Fixed header with light glass -->
+<header class="site-header" role="banner" aria-label="Верхняя панель">
+  <div class="topbar" role="navigation" aria-label="Главная навигация">
+    <div class="brand" aria-hidden="false">
+      <div class="logo" aria-hidden="true">ИК</div>
+      <div>
+        <h2>Иссык-Куль</h2>
+        <p>Южный берег</p>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileNav" title="Меню">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="20" height="2" rx="1" fill="white"/>
+        <rect y="7" width="20" height="2" rx="1" fill="white"/>
+        <rect y="14" width="20" height="2" rx="1" fill="white"/>
+      </svg>
+    </button>
+
+    <nav class="main-nav" id="mainNav" role="menu">
+      <a role="menuitem" href="#" data-file="hotels.html">Отели</a>
+      <a role="menuitem" href="#" data-file="places.html">Гостевые дома</a>
+      <a role="menuitem" href="#" data-file="activities.html">Юрточные лагеря</a>
+      <a role="menuitem" href="#" data-file="contacts.html">Красивые места</a>
     </nav>
+
+    <div class="actions">
+      <a class="btn-ghost" href="https://wa.me/996709100020" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn-primary" id="bookBtn">Забронировать</button>
+    </div>
   </div>
 </header>
 
-<nav class="mobile-menu" id="mobileMenu">
-  <a data-file="hotels.html">ОТЕЛИ</a>
-  <a data-file="places.html">ГОСТЕВЫЕ ДОМА</a>
-  <a data-file="activities.html">ЮРТОЧНЫЕ ЛАГЕРЯ</a>
-  <a data-file="contacts.html">КРАСИВЫЕ МЕСТА</a>
-</nav>
+<!-- Hero -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="hero__bg" role="img" aria-label="Вид на озеро Иссык-Куль"></div>
+  <div class="hero__overlay" aria-hidden="true"></div>
 
-<div class="modal" id="mainModal">
-  <div class="modal-content">
-    <span class="close">×</span>
-    <div id="modalBody"></div>
+  <div class="hero__content">
+    <div class="eyebrow">Иссык-Куль • Южный берег</div>
+    <h1 class="title" id="heroTitle">Природа, уют и приключения<br>на берегу исторического озера</h1>
+    <p class="lead">Лучшие отели, гостевые дома и уникальные юрточные лагеря — подборка проверенных мест и маршрутов для комфортного отдыха на южном берегу Иссык-Куля.</p>
+
+    <div class="hero-ctas" role="group" aria-label="Действия">
+      <button class="cta primary" id="ctaHotels" data-file="hotels.html">Посмотреть отели</button>
+      <button class="cta secondary" id="ctaPlaces" data-file="places.html">Гостевые дома</button>
+    </div>
   </div>
+</section>
+
+<!-- Main content -->
+<main role="main" aria-labelledby="mainHeading">
+  <h2 id="mainHeading" style="text-align:center;margin:36px 0 18px;color:var(--muted);font-weight:700">Популярные предложения</h2>
+
+  <div class="grid" id="cardsGrid" aria-hidden="false">
+    <!-- Card 1 -->
+    <article class="card" role="article" aria-label="Отель у озера">
+      <div class="img-wrap"><img src="https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/hotel1.jpg" alt="Отель у озера" loading="lazy"></div>
+      <div class="body">
+        <h3>Отель «Лазурный берег»</h3>
+        <p>Комфортные номера с видом на озеро, собственный пляж и завтраки «шведский стол».</p>
+        <div class="meta">
+          <div class="price">от 3500 сом/ночь</div>
+          <button class="btn" data-file="hotel-details1.html">Подробнее</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" role="article" aria-label="Гостевой дом">
+      <div class="img-wrap"><img src="https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/guesthouse.jpg" alt="Гостевой дом" loading="lazy"></div>
+      <div class="body">
+        <h3>Гостевой дом «Тыныч»</h3>
+        <p>Уютные номера, домашняя кухня и доброжелательная семья-хозяин.</p>
+        <div class="meta">
+          <div class="price">от 1200 сом/ночь</div>
+          <button class="btn" data-file="guesthouse-details.html">Подробнее</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card" role="article" aria-label="Юрточный лагерь">
+      <div class="img-wrap"><img src="https://raw.githubusercontent.com/kosmos-crypto/kosmos-crypto.github.io/main/yurt-camp.jpg" alt="Юрточный лагерь" loading="lazy"></div>
+      <div class="body">
+        <h3>Юрточный лагерь «Саякат»</h3>
+        <p>Аутентичный опыт с костром, национальными блюдами и программой развлечений.</p>
+        <div class="meta">
+          <div class="price">от 900 сом/сутки</div>
+          <button class="btn" data-file="yurt-details.html">Подробнее</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Modal (for fetched pages) -->
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Открытое окно">
+  <div class="panel" id="modalPanel" tabindex="-1"></div>
+  <button class="close" id="modalClose" aria-label="Закрыть">✕</button>
 </div>
 
-<footer>
-  <p>Иссык-Куль • Южный берег © 2025</p>
-  <p>WhatsApp: <a href="https://wa.me/996999123456">+996 709 10 00 20 </a></p>
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="margin:0 0 8px">© <strong>Иссык-Куль • Южный берег</strong> — 2025</p>
+    <p style="margin:0;color:var(--muted)">Связаться: <a href="https://wa.me/996709100020" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">+996 709 10 00 20</a></p>
+  </div>
 </footer>
 
 <script>
-document.querySelectorAll('[data-file]').forEach(a => {
-  a.onclick = async () => {
-    const file = a.getAttribute('data-file');
-    const modal = document.getElementById('mainModal');
-    const body = document.getElementById('modalBody');
-    try {
-      const r = await fetch(file + '?v=' + Date.now());
-      const html = await r.text();
-      body.innerHTML = html;
-    } catch {
-      body.innerHTML = '<p style="color:#f66;text-align:center;padding:100px">Файл не найден</p>';
-    }
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-});
+  // Helper query
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
 
-document.querySelector('.modal').onclick = e => {
-  if (e.target === document.querySelector('.modal') || e.target.classList.contains('close')) {
-    document.querySelector('.modal').classList.remove('active');
+  // Mobile toggle
+  const mobileToggle = $('#mobileToggle');
+  const mainNav = $('#mainNav');
+
+  // Create a simple mobile nav overlay when toggled
+  let mobileMenuEl;
+  function createMobileMenu(){
+    if (mobileMenuEl) return;
+    mobileMenuEl = document.createElement('div');
+    mobileMenuEl.setAttribute('id','mobileNav');
+    mobileMenuEl.style.position = 'fixed';
+    mobileMenuEl.style.inset = '0';
+    mobileMenuEl.style.background = 'linear-gradient(180deg, rgba(2,8,12,0.96), rgba(2,8,12,0.98))';
+    mobileMenuEl.style.zIndex = 80;
+    mobileMenuEl.style.display = 'grid';
+    mobileMenuEl.style.placeItems = 'center';
+    mobileMenuEl.style.padding = '40px 20px';
+    mobileMenuEl.innerHTML = `
+      <nav style="display:flex;flex-direction:column;gap:22px;align-items:center;">
+        <a href="#" data-file="hotels.html" style="font-size:22px;color:white;font-weight:800">Отели</a>
+        <a href="#" data-file="places.html" style="font-size:22px;color:white;font-weight:800">Гостевые дома</a>
+        <a href="#" data-file="activities.html" style="font-size:22px;color:white;font-weight:800">Юрточные лагеря</a>
+        <a href="#" data-file="contacts.html" style="font-size:22px;color:white;font-weight:800">Красивые места</a>
+        <a href="https://wa.me/996709100020" target="_blank" style="font-size:18px;color:var(--accent);font-weight:700">WhatsApp</a>
+      </nav>
+    `;
+    mobileMenuEl.addEventListener('click', (ev)=> {
+      if(ev.target === mobileMenuEl) closeMobileMenu();
+      // clicking links handled below via delegated listener
+    });
+    document.body.appendChild(mobileMenuEl);
+
+    // delegated listener for links
+    mobileMenuEl.addEventListener('click', (e) => {
+      const file = e.target.getAttribute && e.target.getAttribute('data-file');
+      if(file){
+        openModalWithFile(file);
+        closeMobileMenu();
+      }
+    });
+    mobileMenuEl.style.opacity = '0';
+    mobileMenuEl.style.transition = 'opacity .28s ease';
+  }
+
+  function openMobileMenu(){
+    createMobileMenu();
+    mobileMenuEl.style.opacity = '1';
+    mobileToggle.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu(){
+    if (!mobileMenuEl) return;
+    mobileMenuEl.style.opacity = '0';
+    setTimeout(()=> {
+      try{ mobileMenuEl.remove(); mobileMenuEl = null; }catch(e){}
+    }, 310);
+    mobileToggle.setAttribute('aria-expanded','false');
     document.body.style.overflow = '';
   }
-};
 
-document.getElementById('burger').onclick = () => {
-  document.getElementById('burger').classList.toggle('active');
-  document.getElementById('mobileMenu').classList.toggle('active');
-  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
-};
+  mobileToggle.addEventListener('click', () => {
+    if(!mobileMenuEl) openMobileMenu(); else closeMobileMenu();
+  });
+
+  // Modal logic
+  const modal = $('#modal');
+  const modalPanel = $('#modalPanel');
+  const modalClose = $('#modalClose');
+
+  async function openModalWithFile(file){
+    modalPanel.innerHTML = '<div style="padding:40px;color:var(--muted);text-align:center">Загрузка…</div>';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+
+    try {
+      const res = await fetch(file + '?v=' + Date.now());
+      if(!res.ok) throw new Error('not found');
+      const html = await res.text();
+      modalPanel.innerHTML = html;
+      // focus panel for accessibility
+      setTimeout(()=> modalPanel.focus(), 80);
+    } catch(err){
+      modalPanel.innerHTML = '<div style="padding:40px;color:#f66;text-align:center">Файл не найден или ошибка загрузки</div>';
+    }
+  }
+
+  // open modal when clicking buttons/links with data-file
+  document.addEventListener('click', (e) => {
+    const file = e.target.getAttribute && e.target.getAttribute('data-file');
+    if(file){
+      e.preventDefault();
+      openModalWithFile(file);
+    }
+  });
+
+  // close modal
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeModal();
+  });
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    modalPanel.innerHTML = '';
+  }
+
+  // Quick CTA handlers
+  $('#bookBtn').addEventListener('click', ()=> {
+    // redirect to WhatsApp booking for now
+    window.open('https://wa.me/996709100020', '_blank');
+  });
+
+  // Small polish: lazy load placeholders if images missing
+  document.addEventListener('DOMContentLoaded', () => {
+    // ensure images exist, if not show neutral placeholder
+    $$('img[loading="lazy"]').forEach(img => {
+      img.addEventListener('error', ()=> {
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="#121214"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#7e8a8c" font-family="Inter,Arial" font-size="28">Изображение недоступно</text></svg>'
+        );
+      });
+    });
+  });
+
+  // Keyboard accessibility: Escape closes modal or mobile menu
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      if(modal.classList.contains('open')) closeModal();
+      if(mobileMenuEl) closeMobileMenu();
+    }
+  });
 </script>
 </body>
 </html>
